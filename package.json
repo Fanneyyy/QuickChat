@@ -4,7 +4,7 @@
   "description": "Tiny Quick Chat App",
   "main": "client/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/chatserver.js"
   },
   "repository": {
     "type": "git",
