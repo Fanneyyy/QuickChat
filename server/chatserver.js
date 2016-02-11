@@ -2,9 +2,10 @@ var express = require('express'),
 app = express(), 
 http = require('http'), 
 server = http.createServer(app),
+port = process.env.PORT || 8080,
 io = require('socket.io').listen(server);
 
-server.listen(8080);
+server.listen(port);
 
 //Store room in an object.
 var rooms = {};
