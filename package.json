@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/Fanneyyy/QuickChat.git"
   },
+  "engines": {
+    "node": "0.12.7"
+  },
   "keywords": [
     "Angular",
     "Node",
