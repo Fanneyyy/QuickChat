@@ -20,7 +20,8 @@
       var ws = new WebSocket(host);
       ws.onmessage = function (event) {
         var li = document.createElement('li');
-        li.innerHTML = JSON.parse(event.data);
+        //li.innerHTML = JSON.parse(event.data);
+        li.innerHTML = "Hi Svavar :*"
         document.querySelector('#pings').appendChild(li);
       };
     </script>
