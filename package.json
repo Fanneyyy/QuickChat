@@ -1,32 +1,18 @@
 {
-  "name": "quickapp",
-  "version": "1.0.0",
-  "description": "Tiny Quick Chat App",
-  "main": "client/index.html",
-  "scripts": {
-    "start": "node server/chatserver.js"
-  },
+  "name": "node-ws-test",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fanneyyy/QuickChat.git"
+    "url": "https://github.com/heroku-examples/node-ws-test.git"
   },
   "dependencies": {
-    "express": "4.13.3",
-    "ws": "0.4.x",
-    "socket.io": "^0.9.13"
+    "express": "^4.4.5",
+    "ws": "0.4.x"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "0.10.x"
   },
-  "keywords": [
-    "Angular",
-    "Node",
-    "Chat"
-  ],
-  "author": "Fanney Sig",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Fanneyyy/QuickChat/issues"
-  },
-  "homepage": "https://github.com/Fanneyyy/QuickChat#readme"
+  "scripts": {
+    "start": "node index.js"
+  }
 }
