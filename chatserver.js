@@ -9,6 +9,9 @@ app.use(express.static(__dirname + "/"))
 
 server.listen(port);
 
+var open = require('open');
+open('http://www.localhost:5000');
+
 //Store room in an object.
 var rooms = {};
 //Global user object, since we want to know what rooms each user is in etc.
