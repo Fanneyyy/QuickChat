@@ -40,7 +40,7 @@ gulp.task('build', function () {
 
 gulp.task('watch', function () {
     var files = [
-        '/client/*.js',
+        'client/*',
         '*.html'
     ];
 
