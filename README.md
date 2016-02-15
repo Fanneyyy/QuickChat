@@ -24,7 +24,9 @@ gulp
 
 #### Host the application on Heroku (optional):
 [Get a Heroku account](https://www.heroku.com/home)
+
 [Setup Heroku Toolbelt](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)
+
 Login to heroku from your command shell
 ```
 heroku login
