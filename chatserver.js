@@ -1,6 +1,6 @@
 var express = require('express'), 
 app = express(), 
-http = require('http'), 
+http = require('https'), 
 server = http.createServer(app),
 io = require('socket.io').listen(server),
 port = process.env.PORT || 5000;
