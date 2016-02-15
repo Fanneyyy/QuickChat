@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
-    shell = require('gulp-shell');
+    shell = require('gulp-shell'),
+    browserSync = require('browser-sync');
 
 gulp.task('build', function () {
     return gulp.src('/client/*.js')
@@ -37,6 +38,19 @@ gulp.task('build', function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['build'], shell.task([
+gulp.task('watch', function () {
+    var files = [
+        '/client/*.js',
+        '*.html'
+    ];
+
+    browserSync.init(files, {
+        server: {
+            baseDir: './'
+        }
+    });
+});
+
+gulp.task('default', ['build', 'watch'], shell.task([
   'node chatserver.js'
 ]))
