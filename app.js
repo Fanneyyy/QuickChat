@@ -13,8 +13,7 @@ angular.module('quickchat').controller('homecontroller',function($scope){
     $scope.username = '';
 
     $scope.login = function(){
-        var host = location.origin.replace(/^https/, 'socket')
-        var socket = io.connect(host);
+        var socket = io.connect('//fanneyyy-quickchat.herokuapp.com');
         socket.emit("adduser", $scope.username, function(available){                    
             $scope.available = available;
             $scope.$apply();
