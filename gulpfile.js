@@ -1,9 +1,10 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    shell = require('gulp-shell');
 
-gulp.task('default', function () {
+gulp.task('build', function () {
     return gulp.src('/client/*.js')
         .pipe(jshint({ 
             curly:  true,
@@ -35,3 +36,7 @@ gulp.task('default', function () {
         .pipe(concat('app.js'))
         .pipe(gulp.dest('build'));
 });
+
+gulp.task('default', ['build'], shell.task([
+  'node chatserver.js'
+]))
