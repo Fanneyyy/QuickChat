@@ -16,6 +16,6 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "start": "node server/chatserver.js"
+    "start": "node chatserver.js"
   }
 }

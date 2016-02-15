@@ -1,4 +1,4 @@
-<html>
+<html ng-app="quickchat">
   <head>
     <style>
       body {
@@ -14,20 +14,23 @@
         line-height: 1.4;
       }
     </style>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="app.js"></script>
 
-    <script>
-      var host = location.origin.replace(/^http/, 'ws')
-      var ws = new WebSocket(host);
-      ws.onmessage = function (event) {
-        var li = document.createElement('li');
-        //li.innerHTML = JSON.parse(event.data);
-        li.innerHTML = "Hi Svavar :*"
-        document.querySelector('#pings').appendChild(li);
-      };
-    </script>
   </head>
-  <body>
+<!--   <body>
     <h1>Pings</h1>
     <ul id='pings'></ul>
-  </body>
+  </body> -->
+  <body ng-controller="homecontroller"> 
+  <form name="loginForm">
+    <input type="text" ng-model="username" required/>
+    
+    The username : {{username}} is {{available?'available':'not available'}}  
+    
+    <button ng-click="login()" ng-show="loginForm.$valid">Login</button>
+  </form>
+
+</body>
 </html>
