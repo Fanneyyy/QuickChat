@@ -8,9 +8,9 @@
   "dependencies": {
     "express": "^4.4.5",
     "ws": "0.4.x",
-    "socket.io" : "0.9.13", // server
-    "angular": "^1.5.0", // client
-    "socket.io-client": "^0.9.16" // client
+    "socket.io": "0.9.13",
+    "angular": "^1.5.0",
+    "socket.io-client": "^0.9.16"
   },
   "engines": {
     "node": "0.10.x"
