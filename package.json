@@ -10,7 +10,8 @@
     "ws": "0.4.x",
     "socket.io": "0.9.13",
     "angular": "^1.5.0",
-    "socket.io-client": "^0.9.16"
+    "socket.io-client": "^0.9.16",
+    "open": "^3.7.1"
   },
   "engines": {
     "node": "0.10.x"
