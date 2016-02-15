@@ -15,22 +15,17 @@
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-    <script src="//fanneyyy-quickchat.herokuapp.com/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="client/app.js"></script>
 
   </head>
-<!--   <body>
-    <h1>Pings</h1>
-    <ul id='pings'></ul>
-  </body> -->
   <body ng-controller="homecontroller"> 
-  <form name="loginForm">
-    <input type="text" ng-model="username" required/>
-    
-    The username : {{username}} is {{available?'available':'not available'}}  
-    
-    <button ng-click="login()" ng-show="loginForm.$valid">Login</button>
-  </form>
-
-</body>
+    <form name="loginForm">
+      <input type="text" ng-model="username" required/>
+      
+      The username : {{username}} is {{available?'available':'not available'}}  
+      
+      <button ng-click="login()" ng-show="loginForm.$valid">Login</button>
+    </form>
+  </body>
 </html>
