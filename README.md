@@ -4,31 +4,19 @@ Assignment for Web Programming 2
 INITIALIZE PROJECT FROM GITHUB AND GET UP AND RUNNING
 
 ``` 
-clone...
+git clone https://github.com/Fanneyyy/QuickChat.git
 ``` 
-
-Server Folder:
-``` 
-npm install
-node chatserver.js
-``` 
-
-Client Folder
-``` 
-bower install angular
-python -m SimpleHTTPServer 8000
-```
 
 Main Folder:
 ``` 
+npm install
+bower install angular
+
 sudo npm install -g gulp
 npm install --save-dev gulp
 npm install --save-dev gulp-uglify
 npm install --save-dev gulp-concat
-
-sudo npm install -g jshint
-npm install --save-dev jshint
-npm install gulp gulp-jshint --save-dev
+npm install jshint gulp-jshint --save-dev
 
 gulp
 ``` 
