@@ -11,6 +11,11 @@ Cloning the Repository:
 git clone https://github.com/Fanneyyy/QuickChat.git
 ``` 
 
+If you don't have gulp installed please start by installing it globally:
+```
+sudo npm install -g gulp
+``` 
+
 Install dependencies in main folder:
 ```
 cd QuickChat
