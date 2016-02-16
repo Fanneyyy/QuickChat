@@ -1,4 +1,4 @@
-angular.module("quickchat").factory('socket', function ($rootScope) {
+angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScope) {
   var socket = io.connect();
   return {
     on: function (eventName, callback) {
@@ -20,4 +20,4 @@ angular.module("quickchat").factory('socket', function ($rootScope) {
       })
     }
   };
-});
+}]);

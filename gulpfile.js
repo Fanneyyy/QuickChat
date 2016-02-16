@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync');
 
 gulp.task('build', function () {
-    return gulp.src('/client/*.js')
+    return gulp.src('client/*.js')
         .pipe(jshint({ 
             curly:  true,
             immed:  true,
@@ -51,6 +51,6 @@ gulp.task('watch', function () {
     });
 });
 
-gulp.task('default', ['build', 'watch'], shell.task([
+gulp.task('default', ['build'], shell.task([
   'node chatserver.js'
 ]))

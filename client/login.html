@@ -1,0 +1,16 @@
+<div ng-hide="loggedIn">
+  <input type="text" ng-model="nick" />
+  <button ng-click="login()">login</button>
+</div>
+
+<ul>
+  <li ng-repeat="room in rooms">
+    {{room.topic}}
+  </li>
+</ul>
+
+<ul>
+  <li ng-repeat="user in users">
+    {{user}}
+  </li>
+</ul>
