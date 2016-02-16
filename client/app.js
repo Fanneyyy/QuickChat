@@ -1,4 +1,9 @@
 "use strict";
+angular.module("quickchat", [
+    'ngRoute',
+    'LoginController'
+    ]);
+
 
 angular.module("quickchat", []);
 
