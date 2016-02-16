@@ -4,33 +4,27 @@ angular.module("quickchat", [
     'LoginController'
     ]);
 
-
 angular.module("quickchat", []);
 
 angular.module("quickchat", ["ngRoute"]).config(function($routeProvider) {
     $routeProvider
     .when("/home/index", {
-        templateUrl: "client/index.html",
+        templateUrl: "client/HomeController/home.html",
         controller: "HomeController"
     })
     .when("home/rooms", {
-        templateUrl: "client/rooms.html",
+        templateUrl: "client/RoomController/rooms.html",
         controller: "RoomController"
     })
     .when("home/chat", {
-        templateUrl: "client/chat.html",
+        templateUrl: "client/ChatController/chat.html",
         controller: "ChatController"
     })
     .when("home/login", {
-        templateUrl: "client/login.html",
+        templateUrl: "client/LoginController/login.html",
         controller: "LoginController"
     })
     .otherwise( {
         redirectTo: "/home/index"
     });
 });
-
-angular.module("quickchat").controller("HomeController", 
-        ["$scope", "$http", "socket", function($scope, $http, socket) {
-
-}]);
