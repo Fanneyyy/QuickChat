@@ -13,6 +13,6 @@ angular.module("quickchat").controller("RoomController",
                 console.log($scope.room);
                 console.log("room joined");
             }
-        })
-    }
+        });
+    };
 }]);

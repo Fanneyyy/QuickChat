@@ -17,7 +17,7 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
             callback.apply(socket, args);
           }
         });
-      })
+      });
     }
   };
 }]);
