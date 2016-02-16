@@ -19,6 +19,7 @@ var users = {};
 
 //Default room.
 rooms.lobby = new Room();
+rooms.lobby.name = "lobby";
 rooms.lobby.setTopic("Welcome to the lobby!");
 
 io.sockets.on('connection', function (socket) {
@@ -46,6 +47,9 @@ io.sockets.on('connection', function (socket) {
 		var pass = joinObj.pass;
 		var accepted = true;
 		var reason;
+
+		console.log(joinObj);
+		console.log(joinObj.room);
 
 		//If the room does not exist
 		if(rooms[room] === undefined) {
@@ -308,6 +312,7 @@ io.sockets.on('connection', function (socket) {
 
 //Define the Room class/object.
 function Room() {
+	this.name = "",
 	this.users = {},
 	this.ops = {},
 	this.banned = {},

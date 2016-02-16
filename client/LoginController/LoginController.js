@@ -1,7 +1,6 @@
 angular.module("quickchat").controller("LoginController", 
         ["$scope", "$http", "socket", function($scope, $http, socket) {
     $scope.nick = "";
-    $scope.loggedIn = false;
     $scope.rooms = [];
     $scope.users = [];
 
@@ -17,6 +16,8 @@ angular.module("quickchat").controller("LoginController",
         socket.emit("adduser", $scope.nick, function(available) {
             if (available){
                 $scope.loggedIn = true;
+                $scope.showRooms = false;
+                $scope.showChat = false;
                 socket.emit("rooms");
                 socket.emit("users");
             }
