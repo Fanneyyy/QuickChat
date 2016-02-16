@@ -1,4 +1,3 @@
-
 angular.module("quickchat").controller("LoginController", 
         ["$scope", "$http", "socket", function($scope, $http, socket) {
     $scope.nick = "";
@@ -23,3 +22,4 @@ angular.module("quickchat").controller("LoginController",
             }
         });
     };
+}]);
