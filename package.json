@@ -11,7 +11,8 @@
     "socket.io": "0.9.13",
     "angular": "^1.5.0",
     "socket.io-client": "^0.9.16",
-    "open": "0.0.5"
+    "open": "0.0.5",
+    "angular-route": "1.4.x"
   },
   "engines": {
     "node": "0.10.x"
