@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync');
 
 gulp.task('build', function () {
-    return gulp.src('/client/*.js')
+    return gulp.src('client/*.js')
         .pipe(jshint({ 
             curly:  true,
             immed:  true,
