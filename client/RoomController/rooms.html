@@ -2,8 +2,8 @@
     <div ng-show="showRooms" class="ng-hide">This is the list of Rooms
         <ul>
           <li ng-repeat="room in rooms">
-            <a ng-model="room" ng-click="join()" ng-href="#client/ChatController/{{room}}">
-            {{Object.keys(room)}}</a>
+            <a ng-model="room" ng-click="join()" ng-href="#home/chat/{{room}}">
+            {{room}}</a>
           </li>
         </ul>
         <div>

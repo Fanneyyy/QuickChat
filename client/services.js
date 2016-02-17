@@ -32,7 +32,6 @@ angular.module("quickchat").factory('globals', ["$rootScope", function ($rootSco
         this.broadCast();
       },
       setShowRooms: function(showRooms) {
-        console.log("change show rooms")
         this.showRooms = showRooms;
         this.broadCast();
       },

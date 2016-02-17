@@ -12,7 +12,7 @@ angular.module("quickchat", [
             templateUrl: "client/RoomController/rooms.html",
             controller: "RoomController"
         })
-        .when("home/chat", {
+        .when("home/chat:roomId", {
             templateUrl: "client/ChatController/chat.html",
             controller: "ChatController"
         })
