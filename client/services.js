@@ -25,13 +25,14 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
 angular.module("quickchat").factory('globals', ["$rootScope", function ($rootScope) {
     var globals = {
       loggedIn: false,
-      showRooms: true,
-      showChat: true,
+      showRooms: false,
+      showChat: false,
       setLoggedIn: function(loggedIn) {
         this.loggedIn = loggedIn;
         this.broadCast();
       },
       setShowRooms: function(showRooms) {
+        console.log("change show rooms")
         this.showRooms = showRooms;
         this.broadCast();
       },

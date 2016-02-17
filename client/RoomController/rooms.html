@@ -1,9 +1,9 @@
 <div ng-controller="RoomController">
-    <div ng-hide="showRooms">This is the list of Rooms
+    <div ng-show="showRooms" class="ng-hide">This is the list of Rooms
         <ul>
           <li ng-repeat="room in rooms">
-            <a ng-model="room" ng-click="join()" ng-href="#client/ChatController/{{room.topic}}">
-            {{room}}</a>
+            <a ng-model="room" ng-click="join()" ng-href="#client/ChatController/{{room}}">
+            {{Object.keys(room)}}</a>
           </li>
         </ul>
         <div>

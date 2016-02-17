@@ -17,8 +17,8 @@ angular.module("quickchat").controller("LoginController",
         socket.emit("adduser", $scope.nick, function(available) {
             if (available){
                 globals.setLoggedIn(true);
-                globals.setShowRooms(false);
-                globals.setShowChat(false);
+                globals.setShowRooms(true);
+                globals.setShowChat(true);
                 socket.emit("rooms");
                 socket.emit("users");
             }
@@ -27,7 +27,6 @@ angular.module("quickchat").controller("LoginController",
 
     $scope.$on('handleBroadcast', function() {
         $scope.loggedIn = globals.loggedIn;
-        $scope.showRooms = globals.showRooms;
         $scope.showChat = globals.showChat;
     });
 }]);
