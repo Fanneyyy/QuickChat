@@ -1,12 +1,11 @@
 angular.module("quickchat").controller("LoginController", 
-        ["$scope", "$http", "globals", "socket", function($scope, $http, globals, socket) {
+        ["$scope", "$http", "$location", "globals", "socket", function($scope, $http, $location, globals, socket) {
     $scope.nick = "";
     $scope.rooms = [];
     $scope.users = [];
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
-        console.log($scope.rooms);
     });
 
     socket.on("userlist", function(data) {
@@ -20,6 +19,7 @@ angular.module("quickchat").controller("LoginController",
                 globals.setShowRooms(true);
                 socket.emit("rooms");
                 socket.emit("users");
+                $location.path('/home/rooms/' + $scope.nick);
             }
         });
     };

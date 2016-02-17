@@ -1,6 +1,12 @@
 <div ng-controller="ChatController">
-    <div ng-show="showChat" class="ng-hide">
+<!--     <div ng-show="showChat" class="ng-hide"> -->
+    <div>
         This is a chat window
+        <ul>
+            <li ng-repeat="user in users">
+                {{user}}
+              </li>
+        </ul>
         <div>
             <input type="text" ng-model="message" />
             <button ng-click="addMessage()">Send Message</button>
