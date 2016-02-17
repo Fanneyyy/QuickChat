@@ -17,7 +17,31 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
             callback.apply(socket, args);
           }
         });
-      })
+      });
     }
   };
+}]);
+
+angular.module("quickchat").factory('globals', ["$rootScope", function ($rootScope) {
+    var globals = {
+      loggedIn: false,
+      showRooms: true,
+      showChat: true,
+      setLoggedIn: function(loggedIn) {
+        this.loggedIn = loggedIn;
+        this.broadCast();
+      },
+      setShowRooms: function(showRooms) {
+        this.showRooms = showRooms;
+        this.broadCast();
+      },
+      setShowChat: function(showChat) {
+        this.showChat = showChat;
+        this.broadCast();
+      },
+      broadCast: function() {
+        $rootScope.$broadcast('handleBroadcast');
+      }
+    };
+    return globals;
 }]);

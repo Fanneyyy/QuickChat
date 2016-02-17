@@ -1,10 +1,11 @@
 angular.module("quickchat").controller("RoomController", 
-        ["$scope", "$http", "socket", function($scope, $http, socket) {
+        ["$scope", "socket", function($scope, socket) {
     $scope.rooms = [];
     $scope.room = "";
 
     socket.on("roomlist", function(data) {
-         $scope.rooms = Object.keys(data);
+        $scope.rooms = Object.keys(data);
+        //console.log($scope.rooms);
     });
 
     $scope.join = function join() {
@@ -13,6 +14,6 @@ angular.module("quickchat").controller("RoomController",
                 console.log($scope.room);
                 console.log("room joined");
             }
-        })
-    }
+        });
+    };
 }]);
