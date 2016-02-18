@@ -9,12 +9,12 @@
         </ul>
         <ul>
             <li ng-repeat="message in messages">
-                {{message}}
+                Time: {{message.timestamp | date:'HH:mm:ss'}} User: {{message.nick}} Message: {{message.message}} 
             </li>
         </ul>
-        <div>
-            <input type="text" ng-model="message" />
-            <button type="submit" ng-click="addMessage()">Send Message</button>
-        </div>
+        <form>
+            <input type="text" ng-model="message" required />
+            <button ng-click="addMessage()">Send Message</button>
+        </form>
     </div>
 </div>

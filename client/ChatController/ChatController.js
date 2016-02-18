@@ -8,7 +8,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.users = [];
     $scope.ops = [];
     $scope.rooms = [];
-    $scope.room = "";
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
@@ -19,10 +18,16 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
+    socket.on("updatechat", function(data) {
+        if ($scope.roomName !== undefined) {
+            $scope.messages = $scope.rooms[$scope.roomName].messageHistory;
+        }
+    });
+
     $scope.addMessage = function addMessage() {
-        socket.emit("sendmsg", $scope.message, function(available) {
-            socket.emit("rooms");
-        });
+        socket.emit("sendmsg", {roomName: $scope.roomName, msg: $scope.message});
+        socket.emit("rooms");
+        $scope.messages = $scope.rooms[$scope.roomName].messageHistory;
     };
 
     $scope.$on('handleBroadcast', function() {

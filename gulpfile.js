@@ -20,7 +20,8 @@ gulp.task('build', function () {
             eqeqeq: true,
             predef: [
                 'angular',
-                'io'
+                'io',
+                '$'
             ],
             globals: [
                 '_',
