@@ -9,7 +9,8 @@ angular.module("quickchat").controller("RoomController",
 
     socket.on("roomlist", function(data) {
         $scope.rooms = Object.keys(data);
-        console.log($scope.rooms);
+        debugger;
+        console.log(data);
     });
 
     $scope.join = function join() {
