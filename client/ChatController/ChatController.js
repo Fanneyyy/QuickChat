@@ -1,19 +1,24 @@
 angular.module("quickchat").controller("ChatController", 
-        ["$scope", "$routeParams", "$http", "socket", "globals", function($scope, $http, $routeParams, socket, globals) {
-    console.log($routeParams);
-    $scope.nick = "";
-    $scope.roomName = "";
+        ["$scope", "$http", "$routeParams", "socket", "globals", function($scope, $http, $routeParams, socket, globals) {
+    $scope.nick = $routeParams.nickId;
+    $scope.roomName = $routeParams.roomId;
     $scope.messages = [];
+    $scope.users = [];
+    $scope.ops = [];
+    $scope.rooms = [];
     $scope.room = "";
 
     socket.on("roomlist", function(data) {
-        $scope.room = data;
-        $scope.roomName = Object.keys(data);
+        $scope.rooms = data;
+        if ($scope.roomName !== undefined) {
+            $scope.ops = $scope.rooms[$scope.roomName].users;
+            $scope.messages = $scope.rooms[$scope.roomName].messageHistory;
+        }
     });
 
-    $scope.chat = function addMessage() {
+    $scope.addMessage = function addMessage() {
         socket.emit("sendmsg", $scope.message, function(available) {
-            // Todo. Add to room history etc..
+            socket.emit("rooms");
         });
     };
 

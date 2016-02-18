@@ -4,13 +4,13 @@
         This is the list of Rooms
         <ul>
           <li ng-repeat="room in rooms">
-            <a ng-model="room" ng-click="join()" ng-href="#home/chat/{{room}}">
+            <a ng-click="join()" ng-href="#home/chat/{{nickId}}{{room}}">
             {{room}}</a>
           </li>
         </ul>
         <div>
           <input type="text" ng-model="room" />
-          <button ng-click="join()">Join New Room</button>
+          <button ng-click="createRoom()">Join New Room</button>
         </div>
     </div>
 </div>
