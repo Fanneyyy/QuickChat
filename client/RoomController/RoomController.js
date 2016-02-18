@@ -1,5 +1,6 @@
 angular.module("quickchat").controller("RoomController", 
-        ["$scope", "$routeParams", "$location", "socket", "globals", function($scope, $routeParams, $location, socket, globals) {
+        ["$scope", "$routeParams", "$location", "socket", "globals", 
+        function($scope, $routeParams, $location, socket, globals) {
     
     socket.emit("rooms");
 
@@ -29,9 +30,18 @@ angular.module("quickchat").controller("RoomController",
     };
 
     $scope.createRoom = function createRoom() {
-        socket.emit("joinroom", { room:$scope.room }, function(joined) {
+        socket.emit("joinroom", { room: $scope.roomName, pass: $scope.roomPassword}, function(joined) {
             if (joined) {
-                $location.path('/home/chat/' + $scope.nick + "/" + $scope.room);
+                $scope.setTopic($scope.roomName, $scope.roomTopic);
+                $location.path('/home/chat/' + $scope.nick + "/" + $scope.roomName);
+            }
+        });
+    };
+
+    $scope.setTopic = function setTopic(room, topic) {
+        socket.emit("settopic", {room: room, topic: topic}, function(success) {
+            if (success) {
+                console.log("new topic set");
             }
         });
     };

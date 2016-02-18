@@ -1,11 +1,14 @@
 <div ng-controller="ChatController">
-<!--     <div ng-show="showChat" class="ng-hide"> -->
     <div>
-        This is a chat window
+        <div ng-model="roomName">This room is called {{roomName}}</div>
+        <div ng-model="roomTopic">The topic is {{roomTopic}}</div>
         <ul>
-            <li ng-repeat="user in users">
-                {{user}}
+            <li ng-repeat="op in ops">
+                {{op}}
             </li>
+            <div class="list-group" ng-repeat="user in users">
+                <a href="" class="list-group-item">{{user}}</a>
+            </div>
         </ul>
         <ul>
             <li ng-repeat="message in messages">
@@ -14,7 +17,10 @@
         </ul>
         <form>
             <input type="text" ng-model="message" required />
-            <button ng-click="addMessage()">Send Message</button>
+            <button ng-click="addMessage(message)">Send Message</button>
         </form>
+        <button ng-click="leaveRoom()">Leave Room</button>
+        <div ng-model="servermessage">{{servermessage.user}} {{servermessage.message}} {{servermessage.room}}</div>
+        <button ng-click="kickUser()">Kick Selected User</button>
     </div>
 </div>
