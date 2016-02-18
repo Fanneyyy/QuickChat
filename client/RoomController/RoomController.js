@@ -1,28 +1,37 @@
 angular.module("quickchat").controller("RoomController", 
         ["$scope", "$routeParams", "$location", "socket", "globals", function($scope, $routeParams, $location, socket, globals) {
+    
     socket.emit("rooms");
 
     $scope.rooms = [];
+    $scope.roomlist = [];
     $scope.room = "";
     $scope.numberOfUsers = [];
     $scope.nick = $routeParams.nickId;
 
     socket.on("roomlist", function(data) {
-        $scope.rooms = Object.keys(data);
-        console.log($scope.rooms);
+        $scope.rooms = data;
+        $scope.roomlist = [];
+        $.each($scope.rooms, function(key, value) {
+            $scope.roomlist.push({
+                room:key, 
+                size:Object.keys(value.users).length
+            });
+        });
     });
 
-    $scope.join = function join() {
-        socket.emit("joinroom", { room:$scope.room }, function(joined) {
+    $scope.join = function join(theRoom) {
+        socket.emit("joinroom", { room:theRoom }, function(joined) {
             if (joined) {
-                $location.path('/home/chat/' + $scope.nick + "/" + $scope.room);
+                console.log("Room: " + theRoom)
             }
         });
     };
 
-    $scope.join = function createRoom() {
+    $scope.createRoom = function createRoom() {
         socket.emit("joinroom", { room:$scope.room }, function(joined) {
             if (joined) {
+                debugger;
                 $location.path('/home/chat/' + $scope.nick + "/" + $scope.room);
             }
         });

@@ -1,5 +1,7 @@
 angular.module("quickchat").controller("ChatController", 
         ["$scope", "$http", "$routeParams", "socket", "globals", function($scope, $http, $routeParams, socket, globals) {
+    socket.emit("rooms");
+
     $scope.nick = $routeParams.nickId;
     $scope.roomName = $routeParams.roomId;
     $scope.messages = [];
@@ -11,7 +13,8 @@ angular.module("quickchat").controller("ChatController",
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
         if ($scope.roomName !== undefined) {
-            $scope.ops = $scope.rooms[$scope.roomName].users;
+            $scope.ops = $scope.rooms[$scope.roomName].ops;
+            $scope.users = $scope.rooms[$scope.roomName].users;
             $scope.messages = $scope.rooms[$scope.roomName].messageHistory;
         }
     });

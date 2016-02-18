@@ -3,9 +3,9 @@
     <div>
         This is the list of Rooms
         <ul>
-          <li ng-repeat="room in rooms">
-            <a ng-click="join()" ng-href="#home/chat/{{nickId}}{{room}}">
-            {{room}}</a>
+          <li ng-repeat="room in roomlist">
+            <a ng-click="join(room.room)" ng-href="#home/chat/{{nick}}/{{room.room}}">
+            Name: {{room.room}} Size: {{room.size}}</a>
           </li>
         </ul>
         <div>
