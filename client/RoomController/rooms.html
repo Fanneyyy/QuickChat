@@ -8,9 +8,11 @@
             Name: {{room.room}} Size: {{room.size}}</a>
           </li>
         </ul>
-        <div>
-          <input type="text" ng-model="room" />
-          <button ng-click="createRoom()">Join New Room</button>
-        </div>
+        <form>
+          Name: <input type="text" ng-model="roomName" required/>
+          Topic: <input type="text" ng-model="roomTopic" required/>
+          Password: <input type="text" ng-model="roomPassword" />
+          <button ng-click="createRoom()">Create New Room</button>
+        </form>
     </div>
 </div>
