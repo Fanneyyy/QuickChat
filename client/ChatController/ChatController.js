@@ -40,6 +40,26 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
+    socket.on("kicked", function(room, user) {
+        if ($scope.roomName === room && $scope.nick === user) {
+            $location.path('/home/rooms/' + $scope.nick);
+        };
+    });
+
+    $scope.kickUsers = function kickUsers(user) {
+        for (var i = 0, len = user.length; i < len; i++) {
+            $scope.kickUser(user[i]);
+        }
+    };
+
+    $scope.kickUser = function kickUser(user) {
+        socket.emit("kick", {room: $scope.roomName, user:user}, function(success) {
+            if (!success) {
+                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+            }
+        });
+    };
+
     $scope.addMessage = function addMessage() {
         socket.emit("sendmsg", {roomName: $scope.roomName, msg: $scope.message});
     };

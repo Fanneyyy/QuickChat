@@ -6,10 +6,14 @@
             <li ng-repeat="op in ops">
                 {{op}}
             </li>
-            <div class="list-group" ng-repeat="user in users">
-                <a href="" class="list-group-item">{{user}}</a>
-            </div>
         </ul>
+        <form>
+            <select name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
+              <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
+            </select><br>
+            <tt>multipleSelect = {{data.multipleSelect}}</tt><br/>
+            <button ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
+        </form>
         <ul>
             <li ng-repeat="message in messages">
                 Time: {{message.timestamp | date:'HH:mm:ss'}} User: {{message.nick}} Message: {{message.message}} 
@@ -21,6 +25,5 @@
         </form>
         <button ng-click="leaveRoom()">Leave Room</button>
         <div ng-model="servermessage">{{servermessage.user}} {{servermessage.message}} {{servermessage.room}}</div>
-        <button ng-click="kickUser()">Kick Selected User</button>
     </div>
 </div>

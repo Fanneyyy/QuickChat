@@ -6,12 +6,14 @@ angular.module("quickchat").controller("RoomController",
 
     $scope.rooms = [];
     $scope.roomlist = [];
-    $scope.room = "";
-    $scope.numberOfUsers = [];
     $scope.nick = $routeParams.nickId;
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
+        $scope.getNumberOfUsers();
+    });
+
+    $scope.getNumberOfUsers = function getNumberOfUsers() {
         $scope.roomlist = [];
         $.each($scope.rooms, function(key, value) {
             $scope.roomlist.push({
@@ -19,12 +21,12 @@ angular.module("quickchat").controller("RoomController",
                 size:Object.keys(value.users).length
             });
         });
-    });
+    };
 
     $scope.join = function join(theRoom) {
         socket.emit("joinroom", { room:theRoom }, function(joined) {
             if (joined) {
-                console.log("Room: " + theRoom);
+                console.log("room joined");
             }
         });
     };
