@@ -1,18 +1,29 @@
 <div ng-controller="RoomController">
 <!--     <div ng-show="showRooms" class="ng-hide"> -->
-    <div>
+    <div class="container col-md-6">
         This is the list of Rooms
         <ul>
+         <div class="list-group" ng-repeat="room in roomlist">
           <li ng-repeat="room in roomlist">
-            <a ng-click="join(room.room)" ng-href="#home/chat/{{nick}}/{{room.room}}">
+            <a type="submit" ng-click="join(room.room)" class="list-group-item" ng-href="#home/chat/{{nick}}/{{room.room}}">
             Name: {{room.room}} Size: {{room.size}}</a>
-          </li>
+          </div>
         </ul>
         <form>
-          Name: <input type="text" ng-model="roomName" required/>
-          Topic: <input type="text" ng-model="roomTopic" required/>
-          Password: <input type="text" ng-model="roomPassword" />
-          <button ng-click="createRoom()">Create New Room</button>
+          <div class="row">
+            <div class="col-xs-4">
+              <input type="text" class="form-control" placeholder="Room name" ng-model="roomName" required/>
+            </div>
+            <div class="col-xs-4">
+              <input type="text" class="form-control" placeholder="Room topic" ng-model="roomTopic" required/>
+            </div>
+            <!--<div class="col-xs-3">
+              <input type="text" class="form-control" placeholder="Room password" ng-model="roomPassword" />
+              </div>!-->
+              <div class="col-xs-4">
+            <button class="btn btn-default" type="submit" ng-click="createRoom()">Create New Room</button>
+            </div>
+          </div>
         </form>
     </div>
 </div>
