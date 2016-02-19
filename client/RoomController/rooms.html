@@ -1,10 +1,10 @@
 <div ng-controller="RoomController">
 <!--     <div ng-show="showRooms" class="ng-hide"> -->
-    <div>
+    <div class="loginmodal-container">
         This is the list of Rooms
         <ul>
           <li ng-repeat="room in roomlist">
-            <a ng-click="join(room.room)" ng-href="#home/chat/{{nick}}/{{room.room}}">
+            <a type="submit" ng-click="join(room.room)" class="login loginmodal-submit" ng-href="#home/chat/{{nick}}/{{room.room}}">
             Name: {{room.room}} Size: {{room.size}}</a>
           </li>
         </ul>
