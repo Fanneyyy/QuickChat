@@ -16,14 +16,15 @@
         </form>
         <div scroll-glue class="chatbox">
             <ul>
-                <li ng-repeat="message in messages">
-                    Time: {{message.timestamp | date:'HH:mm:ss'}} User: {{message.nick}} Message: {{message.message}} 
+                <li ng-repeat="message in messagesViewModel">
+                    <div class="{{message.type}}">Time: {{message.timestamp | date:'HH:mm:ss'}} User: {{message.nick}} {{message.from}} To: {{message.to}} Message: {{message.message}} 
                 </li>
             </ul>
         </div>
         <form>
             <input type="text" ng-model="message"/>
             <button id="submit" ng-click="addMessage(message)">Send Message</button>
+            <button id="submit" ng-click="sendPrivateMessage(data.multipleSelect)">Send Private Message</button>
         </form>
         <button ng-click="leaveRoom()">Leave Room</button>
         <div ng-model="servermessage">{{servermessage.user}} {{servermessage.message}} {{servermessage.room}}</div>

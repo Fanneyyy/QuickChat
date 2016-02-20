@@ -5,11 +5,14 @@ angular.module("quickchat").controller("ChatController",
     $scope.nick = $routeParams.nickId;
     $scope.roomName = $routeParams.roomId;
     $scope.roomTopic = "";
+    $scope.message = "";
     $scope.messages = [];
     $scope.users = [];
     $scope.ops = [];
     $scope.rooms = [];
-
+    $scope.servermessage = "";
+    $scope.privatemessages = [];
+    $scope.messagesViewModel = [];
 
     socket.emit("rooms");
 
@@ -25,12 +28,14 @@ angular.module("quickchat").controller("ChatController",
     socket.on("updatechat", function(roomName, messageHistory) {
         if (roomName !== undefined) {
             $scope.messages = messageHistory;
+            $scope.populateViewModel();
         }
     });
 
     socket.on("servermessage", function(message, room, user) {
         if (room !== undefined) {
-            $scope.servermessage = {message: message, room: room, user: user};
+            $scope.servermessage = {message: message, room: room, user: user, type: "server"};
+
         }
     });
 
@@ -41,10 +46,23 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
+    socket.on("recv_privatemsg", function(nick, msg) {
+        console.log("private message recieved");
+        globals.addMessage({
+            from: nick, 
+            to: $scope.nick,
+            timestamp:  new Date(),
+            message: msg.substring(0, 200),
+            room: $scope.roomName,
+            type: "private"
+        });
+        $scope.populateViewModel();
+    });
+
     socket.on("kicked", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
-        };
+        }
     });
 
     $scope.kickUsers = function kickUsers(user) {
@@ -73,7 +91,40 @@ angular.module("quickchat").controller("ChatController",
         $location.path('/home/rooms/' + $scope.nick);
     };
 
+    $scope.sendPrivateMessage = function sendPrivateMessage(user) {
+        socket.emit("privatemsg", {nick: user, message: $scope.message}, function(success) {
+            console.log("send message");
+            if (success) {
+                globals.addMessage({
+                    from: $scope.nick, 
+                    to: user[0],
+                    timestamp:  new Date(),
+                    message: $scope.message.substring(0, 200),
+                    room: $scope.roomName,
+                    type: "private"
+                });
+                $scope.message = "";
+                $scope.populateViewModel();
+            }
+        });
+    };
+
     $scope.$on('handleBroadcast', function() {
-        $scope.showChat = globals.showChat;
+        //$scope.populateMessages();
     });
+
+    $scope.populateViewModel = function populateViewModel() {
+        $scope.messagesViewModel = [];
+        $.each($scope.messages, function(key, value) {
+            value.type = "global";
+            $scope.messagesViewModel.push(value);
+        });
+        $.each(globals.privateMessages, function(key, value) {
+            if ($scope.roomName === value.room &&
+                    (value.from === $scope.nick || 
+                    value.to === $scope.nick)) {
+                $scope.messagesViewModel.push(value);
+            }
+        });
+    };
 }]);

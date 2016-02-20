@@ -24,19 +24,9 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
 
 angular.module("quickchat").factory('globals', ["$rootScope", function ($rootScope) {
     var globals = {
-      loggedIn: false,
-      showRooms: false,
-      showChat: false,
-      setLoggedIn: function(loggedIn) {
-        this.loggedIn = loggedIn;
-        this.broadCast();
-      },
-      setShowRooms: function(showRooms) {
-        this.showRooms = showRooms;
-        this.broadCast();
-      },
-      setShowChat: function(showChat) {
-        this.showChat = showChat;
+      privateMessages: [],
+      addMessage: function(obj) {
+        this.privateMessages.push(obj);
         this.broadCast();
       },
       broadCast: function() {
