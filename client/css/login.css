@@ -4,6 +4,10 @@ body {
   background-color: #eee;
 }
 
+.text-input {
+  width: 50% !important;
+}
+
 .private {
   color: #f5a129;
 }

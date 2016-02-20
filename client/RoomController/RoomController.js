@@ -17,14 +17,15 @@ angular.module("quickchat").controller("RoomController",
         $scope.roomlist = [];
         $.each($scope.rooms, function(key, value) {
             $scope.roomlist.push({
-                room:key, 
-                size:Object.keys(value.users).length
+                room: key,
+                topic: value.topic,
+                size: Object.keys(value.users).length
             });
         });
     };
 
     $scope.join = function join(theRoom) {
-        socket.emit("joinroom", { room:theRoom }, function(joined) {
+        socket.emit("joinroom", { room: theRoom }, function(joined) {
             if (joined) {
                 console.log("room joined");
             }
@@ -32,7 +33,7 @@ angular.module("quickchat").controller("RoomController",
     };
 
     $scope.createRoom = function createRoom() {
-        socket.emit("joinroom", { room: $scope.roomName, pass: $scope.roomPassword}, function(joined) {
+        socket.emit("joinroom", { room: $scope.roomName}, function(joined) {
             if (joined) {
                 $scope.setTopic($scope.roomName, $scope.roomTopic);
                 $location.path('/home/chat/' + $scope.nick + "/" + $scope.roomName);
@@ -41,14 +42,12 @@ angular.module("quickchat").controller("RoomController",
     };
 
     $scope.setTopic = function setTopic(room, topic) {
-        socket.emit("settopic", {room: room, topic: topic}, function(success) {
-            if (success) {
-                console.log("new topic set");
-            }
-        });
+        if (topic) {
+            socket.emit("settopic", {room: room, topic: topic}, function(success) {
+                if (success) {
+                    console.log("new topic set");
+                }
+            });
+        }
     };
-
-    $scope.$on('handleBroadcast', function() {
-        $scope.showRooms = globals.showRooms;
-    });
 }]);
