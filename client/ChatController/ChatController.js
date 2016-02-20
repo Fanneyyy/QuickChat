@@ -62,7 +62,7 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.addMessage = function addMessage() {
-        if ($scope.message != "") {
+        if ($scope.message !== "") {
             socket.emit("sendmsg", {roomName: $scope.roomName, msg: $scope.message});
             $scope.message = "";
         }
