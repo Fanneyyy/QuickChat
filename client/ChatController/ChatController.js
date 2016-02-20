@@ -9,7 +9,7 @@ angular.module("quickchat").controller("ChatController",
     $scope.users = [];
     $scope.ops = [];
     $scope.rooms = [];
-    $scope.glued = true;
+
 
     socket.emit("rooms");
 
@@ -62,8 +62,10 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.addMessage = function addMessage() {
-        socket.emit("sendmsg", {roomName: $scope.roomName, msg: $scope.message});
-        $scope.message = "";
+        if ($scope.message != "") {
+            socket.emit("sendmsg", {roomName: $scope.roomName, msg: $scope.message});
+            $scope.message = "";
+        }
     };
 
     $scope.leaveRoom = function leaveRoom() {
