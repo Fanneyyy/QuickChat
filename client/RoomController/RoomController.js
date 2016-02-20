@@ -6,6 +6,7 @@ angular.module("quickchat").controller("RoomController",
 
     $scope.rooms = [];
     $scope.roomlist = [];
+    $scope.roomName = "";
     $scope.nick = $routeParams.nickId;
 
     socket.on("roomlist", function(data) {
@@ -33,16 +34,18 @@ angular.module("quickchat").controller("RoomController",
     };
 
     $scope.createRoom = function createRoom() {
-        socket.emit("joinroom", { room: $scope.roomName}, function(joined) {
-            if (joined) {
-                $scope.setTopic($scope.roomName, $scope.roomTopic);
-                $location.path('/home/chat/' + $scope.nick + "/" + $scope.roomName);
-                alertify.success('Room created!');
-            }
-            else {
-                alertify.error('Room creation failed');
-            }
-        });
+        if ($scope.roomName !== "") {
+            socket.emit("joinroom", { room: $scope.roomName}, function(joined) {
+                if (joined) {
+                    $scope.setTopic($scope.roomName, $scope.roomTopic);
+                    $location.path('/home/chat/' + $scope.nick + "/" + $scope.roomName);
+                    alertify.success('Room created!');
+                }
+                else {
+                    alertify.error('Room creation failed');
+                }
+            });
+        }
     };
 
     $scope.setTopic = function setTopic(room, topic) {
