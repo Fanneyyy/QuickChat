@@ -1,28 +1,45 @@
 <div ng-controller="RoomController">
 <!--     <div ng-show="showRooms" class="ng-hide"> -->
-    <div class="container col-md-6">
+    <div class="container">
         This is the list of Rooms
         <ul>
          <div class="list-group">
             <li ng-repeat="room in roomlist">
+              <div class="row">
                 <a ng-click="join(room.room)" class="list-group-item" ng-href="#home/chat/{{nick}}/{{room.room}}">
-                Name: {{room.room}} Size: {{room.size}}</a>
+                  <div class="col-md-4 ">{{room.room}}</div>
+                    <div class="col-md-4 ">TOPIC</div>
+                    <div class="col-md-4 ">{{room.size}}</div>
+                </a>
+              </div>
             </li>
           </div>
+          <table class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr><th>Room</th><th>Topic</th>   <th>Size</th></tr>
+              </thead>
+              <tbody data-link="row" class="rowlink">
+                <tr ng-repeat="room in roomlist">
+                  <td><a ng-click="join(room.room)" ng-href="#home/chat/{{nick}}/{{room.room}}">{{room.room}}</a></td>
+                  <td>TOPIC</td>
+                  <td>{{room.size}}</td>
+                </tr>
+              </tbody>
+          </table>
         </ul>
         <form>
           <div class="row">
             <div class="col-xs-4">
               <input type="text" class="form-control" placeholder="Room name" ng-model="roomName" required/>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-5">
               <input type="text" class="form-control" placeholder="Room topic" ng-model="roomTopic" required/>
             </div>
             <!--<div class="col-xs-3">
               <input type="text" class="form-control" placeholder="Room password" ng-model="roomPassword" />
               </div>!-->
-              <div class="col-xs-4">
-            <button class="btn btn-default" type="submit" ng-click="createRoom()">Create New Room</button>
+              <div class="col-xs-3">
+            <button class="form-control btn btn-default" type="submit" ng-click="createRoom()">Create Room</button>
             </div>
           </div>
         </form>
