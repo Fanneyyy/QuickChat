@@ -14,7 +14,7 @@
             <tt>multipleSelect = {{data.multipleSelect}}</tt><br/>
             <button ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
         </form>
-        <div scroll-glue class="chatbox">
+        <div scroll-glue class="chatbox col-xs-10">
             <ul>
                 <li ng-repeat="message in messagesViewModel">
                     <div class="{{message.type}}">Time: {{message.timestamp | date:'HH:mm:ss'}} User: {{message.nick}} {{message.from}} To: {{message.to}} Message: {{message.message}} 
