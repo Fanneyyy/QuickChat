@@ -6,14 +6,15 @@
     "url": "https://github.com/heroku-examples/node-ws-test.git"
   },
   "dependencies": {
-    "express": "^4.4.5",
-    "ws": "0.4.x",
-    "socket.io": "0.9.13",
+    "alertifyjs": "^1.6.1",
     "angular": "^1.5.0",
-    "socket.io-client": "^0.9.16",
-    "open": "0.0.5",
     "angular-route": "1.4.x",
-    "bower": "1.6.5"
+    "bower": "1.6.5",
+    "express": "^4.4.5",
+    "open": "0.0.5",
+    "socket.io": "0.9.13",
+    "socket.io-client": "^0.9.16",
+    "ws": "0.4.x"
   },
   "engines": {
     "node": "0.10.x"

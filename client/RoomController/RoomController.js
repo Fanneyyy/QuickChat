@@ -28,7 +28,7 @@ angular.module("quickchat").controller("RoomController",
     $scope.join = function join(theRoom) {
         socket.emit("joinroom", { room: theRoom }, function(joined) {
             if (joined) {
-                console.log("room joined");
+                alertify.success("Joined " + theRoom);
             }
         });
     };
@@ -39,6 +39,10 @@ angular.module("quickchat").controller("RoomController",
                 if (joined) {
                     $scope.setTopic($scope.roomName, $scope.roomTopic);
                     $location.path('/home/chat/' + $scope.nick + "/" + $scope.roomName);
+                    alertify.success('Room created!');
+                }
+                else {
+                    alertify.error('Room creation failed');
                 }
             });
         }
