@@ -7,11 +7,16 @@ angular.module("quickchat").controller("RoomController",
     $scope.rooms = [];
     $scope.roomlist = [];
     $scope.roomName = "";
+    $scope.roomTopic = "";
     $scope.nick = $routeParams.nickId;
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
         $scope.getNumberOfUsers();
+    });
+
+    socket.on("updatetopic", function(room, topic) {
+        socket.emit("rooms");
     });
 
     $scope.getNumberOfUsers = function getNumberOfUsers() {
@@ -26,7 +31,6 @@ angular.module("quickchat").controller("RoomController",
     };
 
     $scope.join = function join(theRoom) {
-        debugger;
         socket.emit("joinroom", { room: theRoom }, function(accepted, reason) {
             if (accepted) {
                 alertify.success("Joined " + theRoom);
