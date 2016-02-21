@@ -55,7 +55,7 @@
                             <div class="col-md-12">
                                 <form>
                                     <select class="full-width h300" class="block" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
-                                        <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
+                                        <option ng-repeat="user in userlist" value="{{user}}">{{user}}</option>
                                     </select>
                                     <button class="btn btn-default btn-block" ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
                                     <button class="btn btn-default btn-block" ng-click="banUsers(data.multipleSelect)">Ban Selected User</button>
