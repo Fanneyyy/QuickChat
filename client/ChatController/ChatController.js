@@ -17,7 +17,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.alerted = false;
 
     socket.emit("rooms");
-    socket.emit("updatechat", $scope.roomName);
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
@@ -30,8 +29,8 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
-    socket.on("updatedchat", function(roomName, messageHistory) {
-        if (roomName !== undefined) {
+    socket.on("updatechat", function(roomName, messageHistory) {
+        if (roomName === $scope.roomName) {
             $scope.messages = messageHistory;
             $scope.populateViewModel();
         }
@@ -71,6 +70,16 @@ angular.module("quickchat").controller("ChatController",
             $location.path('/home/rooms/' + $scope.nick);
             if (!$scope.alerted) {
                 alertify.error("You have been kicked from " + room);
+                $scope.alerted = true;
+            }
+        }
+    });
+
+    socket.on("banned", function(room, user) {
+        if ($scope.roomName === room && $scope.nick === user) {
+            $location.path('/home/rooms/' + $scope.nick);
+            if (!$scope.alerted) {
+                alertify.error("You have been banned from " + room);
                 $scope.alerted = true;
             }
         }
@@ -117,7 +126,7 @@ angular.module("quickchat").controller("ChatController",
 
     $scope.deopUser = function deopUser(user) {
         if (user.startsWith("@")) {
-            user = user.substr(1,user.length)                
+            user = user.substr(1,user.length);            
         } 
         socket.emit("deop", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
@@ -127,16 +136,6 @@ angular.module("quickchat").controller("ChatController",
             }
         });
     };
-
-    socket.on("banned", function(room, user) {
-        if ($scope.roomName === room && $scope.nick === user) {
-            $location.path('/home/rooms/' + $scope.nick);
-            if (!$scope.alerted) {
-                alertify.error("You have been banned from " + room);
-                $scope.alerted = true;
-            }
-        }
-    });
 
     $scope.banUsers = function banUsers(user) {
         for (var i = 0, len = user.length; i < len; i++) {
@@ -188,6 +187,7 @@ angular.module("quickchat").controller("ChatController",
                 $scope.userlist.push(value);
             }
         });
+        $scope.userlist.sort();
     };
 
     $scope.sendPrivateMessage = function sendPrivateMessage(username, msg) {
