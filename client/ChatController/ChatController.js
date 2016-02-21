@@ -17,7 +17,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.alerted = false;
 
     socket.emit("rooms");
-    socket.emit("updatechat", $scope.roomName);
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
@@ -30,8 +29,8 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
-    socket.on("updatedchat", function(roomName, messageHistory) {
-        if (roomName !== undefined) {
+    socket.on("updatechat", function(roomName, messageHistory) {
+        if (roomName === $scope.roomName) {
             $scope.messages = messageHistory;
             $scope.populateViewModel();
         }
