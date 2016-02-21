@@ -117,25 +117,27 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.sendPrivateMessage = function sendPrivateMessage(user) {
-        var username = user[0];
-        if (username !== $scope.nick) {
-            socket.emit("privatemsg", {nick: username, message: $scope.message}, function(success) {
-                console.log("send message");
-                if (success) {
-                    globals.addMessage({
-                        from: $scope.nick, 
-                        to: username,
-                        timestamp: new Date(),
-                        message: $scope.message.substring(0, 200),
-                        room: $scope.roomName,
-                        type: "private"
-                    });
-                    $scope.message = "";
-                    $scope.populateViewModel();
-                } else {
-                    console.log("failed in sending private message");
-                }
-            });
+        if (user) {
+            var username = user[0];
+            if (username !== $scope.nick) {
+                socket.emit("privatemsg", {nick: username, message: $scope.message}, function(success) {
+                    console.log("send message");
+                    if (success) {
+                        globals.addMessage({
+                            from: $scope.nick, 
+                            to: username,
+                            timestamp: new Date(),
+                            message: $scope.message.substring(0, 200),
+                            room: $scope.roomName,
+                            type: "private"
+                        });
+                        $scope.message = "";
+                        $scope.populateViewModel();
+                    } else {
+                        console.log("failed in sending private message");
+                    }
+                });
+            }
         }
     };
 
