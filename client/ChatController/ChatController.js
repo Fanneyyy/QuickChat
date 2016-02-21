@@ -95,10 +95,10 @@ angular.module("quickchat").controller("ChatController",
     $scope.kickUser = function kickUser(user) {
         socket.emit("kick", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
-                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+                alertify.error("You are not an Op in room: " + $scope.roomName + " Sir/Madame " + $scope.nick);
             }
             else {
-                alertify.error("You have kicked " + user + " from "  + $scope.roomName);
+                alertify.success("You have successfully kicked " + user + " from "  + $scope.roomName);
             }
         });
     };
@@ -112,7 +112,7 @@ angular.module("quickchat").controller("ChatController",
     $scope.opUser = function opUser(user) {
         socket.emit("op", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
-                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+                alertify.error("You are not an Op in room: " + $scope.roomName + " Sir/Madame " + $scope.nick);
             }
 
         });
@@ -130,7 +130,7 @@ angular.module("quickchat").controller("ChatController",
         } 
         socket.emit("deop", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
-                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+                alertify.error("You are not an Op in room: " + $scope.roomName + " Sir/Madame " + $scope.nick);
             }
         });
     };
@@ -144,7 +144,10 @@ angular.module("quickchat").controller("ChatController",
     $scope.banUser = function kickUser(user) {
         socket.emit("ban", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
-                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+                alertify.error("You are not an Op in room: " + $scope.roomName + " Sir/Madame " + $scope.nick);
+            }
+            else {
+                alertify.success("Successfully banned " + user);
             }
         });
     };
@@ -188,7 +191,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.sendPrivateMessage = function sendPrivateMessage(username, msg) {
         if (username !== $scope.nick) {
             socket.emit("privatemsg", {nick: username, message: msg}, function(success) {
-                console.log("send message");
                 if (success) {
                     globals.addMessage({
                         from: $scope.nick, 
@@ -200,7 +202,7 @@ angular.module("quickchat").controller("ChatController",
                     });
                     $scope.populateViewModel();
                 } else {
-                    console.log("failed in sending private message");
+                    alertify.error("Failed in sending private message");
                 }
             });
         }
