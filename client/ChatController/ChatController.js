@@ -15,6 +15,7 @@ angular.module("quickchat").controller("ChatController",
     $scope.messagesViewModel = [];
     socket.emit("rooms");
     socket.emit("updatechat", $scope.roomName);
+    $scope.alerted = false;
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
@@ -65,7 +66,10 @@ angular.module("quickchat").controller("ChatController",
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
             debugger;
-            alertify.error("You have been kicked from " + room);
+            if (!$scope.alerted) {
+                alertify.error("You have been kicked from " + room);
+                $scope.alerted = true;
+            }
         }
     });
 
@@ -86,8 +90,10 @@ angular.module("quickchat").controller("ChatController",
     socket.on("banned", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
-            alertify.error("You have been banned from " + room);
-
+            if (!$scope.alerted) {
+                alertify.error("You have been banned from " + room);
+                $scope.alerted = true;
+            }
         }
     });
 
