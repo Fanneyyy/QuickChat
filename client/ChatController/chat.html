@@ -15,7 +15,7 @@
                 
                     <div class="col-sm-8 col-md-9">
                         <div class="row no-gutter">
-                            <div class="col-md-12">
+                            <div class="col-md-12 chat">
                                 <div scroll-glue class="chatbox h300">
                                     <ul class="chat-messages">
                                         <li ng-repeat="message in messagesViewModel">
@@ -31,7 +31,7 @@
                                     <div class="input-group">
                                         <input class="form-control" classtype="text" ng-model="message"/>
                                         <div class="input-group-btn">
-                                            <button type="button"
+                                            <button type="submit"
                                                     class="btn btn-warning button-input"
                                                     id="submit"
                                                     ng-click="addMessage(message)">

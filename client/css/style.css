@@ -16,6 +16,8 @@ ul li {
     height: 300px;
     background: #eee;
     overflow-y: scroll;
+    display: table-cell;
+    vertical-align: bottom;
 }
 
 [scroll-glue] {
@@ -23,12 +25,19 @@ ul li {
     overflow-y: scroll;
 }
 
+.chat {
+  display: table;
+  width: 100%;
+  background-color: #eee;
+}
+
 .text-input {
   width: 50% !important;
 }
 
 .chat-messages {
-  bottom: 0;
+  display: inline-block;
+  max-height: 300px !important;
 }
 
 .private {
