@@ -64,6 +64,7 @@ angular.module("quickchat").controller("ChatController",
     socket.on("kicked", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
+            alertify.error("You have been kicked from " + room);
         }
     });
 
@@ -75,6 +76,28 @@ angular.module("quickchat").controller("ChatController",
 
     $scope.kickUser = function kickUser(user) {
         socket.emit("kick", {room: $scope.roomName, user:user}, function(success) {
+            if (!success) {
+                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+            }
+        });
+    };
+
+    socket.on("banned", function(room, user) {
+        if ($scope.roomName === room && $scope.nick === user) {
+            $location.path('/home/rooms/' + $scope.nick);
+            alertify.error("You have been banned from " + room);
+
+        }
+    });
+
+    $scope.banUsers = function kickUsers(user) {
+        for (var i = 0, len = user.length; i < len; i++) {
+            $scope.banUser(user[i]);
+        }
+    };
+
+    $scope.banUser = function kickUser(user) {
+        socket.emit("ban", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
                 $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
             }
