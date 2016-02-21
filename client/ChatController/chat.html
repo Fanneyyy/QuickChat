@@ -58,6 +58,7 @@
                                         <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
                                     </select>
                                     <button class="btn btn-default btn-block" ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
+                                    <button class="btn btn-default btn-block" ng-click="banUsers(data.multipleSelect)">Ban Selected User</button>
                                     <button class="btn btn-default btn-block" ng-click="leaveRoom()">Leave Room</button>
                                 </form>
 
