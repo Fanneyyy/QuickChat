@@ -48,6 +48,7 @@ angular.module("quickchat").controller("ChatController",
             $scope.users = users;
             $scope.ops = ops;
             $scope.updateUsers();
+            debugger;
         }
     });
 
@@ -88,7 +89,7 @@ angular.module("quickchat").controller("ChatController",
                 $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
             }
             else {
-                alertify.error("You have kicked from " + room);
+                alertify.error("You have kicked " + user + " from "  + $scope.roomName);
             }
         });
     };
@@ -104,9 +105,7 @@ angular.module("quickchat").controller("ChatController",
             if (!success) {
                 $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
             }
-            else {
-                socket.emit("updatechat", $scope.roomName);
-            }
+
         });
     };
 
