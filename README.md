@@ -54,3 +54,13 @@ heroku open
 * Each component (controller, factory, etc.) should be in a single file, but the files should be concatenated and minified when prepared for production, by using a grunt (or gulp) task.
 * All external dependencies (AngularJS etc.) should be installed using bower (EDIT: or npm)
 * The code should go through JSHint/JSLint without warnings. A grunt or gulp file should be included to ensure running jshint/jslint is easy.
+
+## Project user experience
+Quickchat is set up as a web application. The user picks it's username and is ready to go. The application has minimal security, only allowing one user with a specific username be connected at a time. 
+
+After login Quickchat shows a list of available rooms as well as giving the user the option of creating a room.
+
+Inside the chat of a given room the user can view all messages that are visible to him. He/she can then send messages to the message feed as well as send private messages to users in the room.
+
+### Operators privileges
+The creator of each room in Quickchat has the privilege of an operator. That is, he/she can kick/ban user from the room. Operators can also give other users operators privileges.
