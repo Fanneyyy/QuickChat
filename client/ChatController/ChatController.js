@@ -93,6 +93,37 @@ angular.module("quickchat").controller("ChatController",
         });
     };
 
+    $scope.opUsers = function opUsers(user) {
+        for (var i = 0, len = user.length; i < len; i++) {
+            $scope.opUser(user[i]);
+        }
+    };
+
+    $scope.opUser = function opUser(user) {
+        socket.emit("op", {room: $scope.roomName, user:user}, function(success) {
+            if (!success) {
+                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+            }
+            else {
+                socket.emit("updatechat", $scope.roomName);
+            }
+        });
+    };
+
+    $scope.deopUsers = function deopUsers(user) {
+        for (var i = 0, len = user.length; i < len; i++) {
+            $scope.opUser(user[i]);
+        }
+    };
+
+    $scope.deopUser = function deopUser(user) {
+        socket.emit("deop", {room: $scope.roomName, user:user}, function(success) {
+            if (!success) {
+                $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+            }
+        });
+    };
+
     socket.on("banned", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
@@ -103,7 +134,7 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
-    $scope.banUsers = function kickUsers(user) {
+    $scope.banUsers = function banUsers(user) {
         for (var i = 0, len = user.length; i < len; i++) {
             $scope.banUser(user[i]);
         }

@@ -56,6 +56,8 @@
                                     <select class="full-width h300" class="block" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
                                         <option ng-repeat="user in userlist" value="{{user}}">{{user}}</option>
                                     </select>
+                                    <button class="btn btn-default btn-block" ng-click="opUsers(data.multipleSelect)">Op Selected User</button>
+                                    <button class="btn btn-default btn-block" ng-click="deopUsers(data.multipleSelect)">DeOp Selected User</button>
                                     <button class="btn btn-default btn-block" ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
                                     <button class="btn btn-default btn-block" ng-click="banUsers(data.multipleSelect)">Ban Selected User</button>
                                     <button class="btn btn-default btn-block" ng-click="leaveRoom()">Leave Room</button>
