@@ -7,6 +7,8 @@ angular.module("quickchat").controller("LoginController",
             socket.emit("adduser", $scope.nick, function(available) {
                 if (available){
                     $location.path('/home/rooms/' + $scope.nick);
+                } else {
+                    alertify.error("Username entered is not available");
                 }
             });
         }
