@@ -95,7 +95,7 @@ io.sockets.on('connection', function (socket) {
 			users[socket.username].channels[room] = room;
 			//Send the room information to the client.
 			io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
-			socket.emit('updatechat', room, rooms[room].messageHistory);
+			socket.emit('updatedchat', room, rooms[room].messageHistory);
 			socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 			io.sockets.emit('servermessage', "join", room, socket.username);
 		}
@@ -124,7 +124,7 @@ io.sockets.on('connection', function (socket) {
 				message : data.msg.substring(0, 200)
 			};
 			rooms[data.roomName].addMessage(messageObj);
-			io.sockets.emit('updatechat', data.roomName, rooms[data.roomName].messageHistory);
+			io.sockets.emit('updatedchat', data.roomName, rooms[data.roomName].messageHistory);
 		}
 	});
 
@@ -258,6 +258,10 @@ io.sockets.on('connection', function (socket) {
 	//Returns a list of all avaliable rooms.
 	socket.on('rooms', function() {
 		socket.emit('roomlist', rooms);
+	});
+
+	socket.on('updatechat', function(room) {
+		socket.emit('updatedchat', room, rooms[room].messageHistory);
 	});
 
 	//Returns a list of all connected users.

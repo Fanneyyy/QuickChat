@@ -18,7 +18,7 @@
                             <div class="col-md-12 chat">
                                 <div scroll-glue class="chatbox h300">
                                     <ul class="chat-messages">
-                                        <li ng-repeat="message in messagesViewModel">
+                                        <li ng-repeat="message in messagesViewModel track by $index">
                                             <div class="{{message.type}}">[{{message.timestamp | date:'HH:mm:ss'}}] <span class="p5"> {{message.nick}} {{message.to}}:</span> <span class="p5">{{message.message}} </span>
                                         </li>
                                     </ul>

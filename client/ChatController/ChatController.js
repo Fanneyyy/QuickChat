@@ -2,10 +2,6 @@ angular.module("quickchat").controller("ChatController",
         ["$scope", "$http", "$location", "$routeParams", "socket", "globals", 
         function($scope, $http, $location, $routeParams, socket, globals) {
 
-    socket.emit("rooms");
-    socket.emit("updatechat");
-    socket.emit("updateusers");
-
     $scope.nick = $routeParams.nickId;
     $scope.roomName = $routeParams.roomId;
     $scope.roomTopic = "";
@@ -17,6 +13,8 @@ angular.module("quickchat").controller("ChatController",
     $scope.servermessage = "";
     $scope.privatemessages = [];
     $scope.messagesViewModel = [];
+    socket.emit("rooms");
+    socket.emit("updatechat", $scope.roomName);
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
@@ -24,10 +22,11 @@ angular.module("quickchat").controller("ChatController",
             $scope.ops = $scope.rooms[$scope.roomName].ops;
             $scope.users = $scope.rooms[$scope.roomName].users;
             $scope.roomTopic = $scope.rooms[$scope.roomName].topic;
+            $scope.messages = $scope.rooms[$scope.roomName].messageHistory;
         }
     });
 
-    socket.on("updatechat", function(roomName, messageHistory) {
+    socket.on("updatedchat", function(roomName, messageHistory) {
         if (roomName !== undefined) {
             $scope.messages = messageHistory;
             $scope.populateViewModel();
@@ -37,7 +36,6 @@ angular.module("quickchat").controller("ChatController",
     socket.on("servermessage", function(message, room, user) {
         if (room !== undefined) {
             $scope.servermessage = {message: message, room: room, user: user, type: "server"};
-
         }
     });
 
@@ -50,15 +48,17 @@ angular.module("quickchat").controller("ChatController",
 
     socket.on("recv_privatemsg", function(nick, msg) {
         console.log("private message recieved");
-        globals.addMessage({
-            from: nick, 
-            to: $scope.nick,
-            timestamp:  new Date(),
-            message: msg.substring(0, 200),
-            room: $scope.roomName,
-            type: "private"
-        });
-        $scope.populateViewModel();
+        if (nick !== undefined) {
+            globals.addMessage({
+                from: nick, 
+                to: $scope.nick,
+                timestamp: new Date(),
+                message: msg.substring(0, 200),
+                room: $scope.roomName,
+                type: "private"
+            });
+            $scope.populateViewModel();
+        }
     });
 
     socket.on("kicked", function(room, user) {
@@ -94,28 +94,27 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.sendPrivateMessage = function sendPrivateMessage(user) {
-        if (user !== $scope.nick) {
-            socket.emit("privatemsg", {nick: user, message: $scope.message}, function(success) {
+        var username = user[0];
+        if (username !== $scope.nick) {
+            socket.emit("privatemsg", {nick: username, message: $scope.message}, function(success) {
                 console.log("send message");
                 if (success) {
                     globals.addMessage({
                         from: $scope.nick, 
-                        to: user[0],
-                        timestamp:  new Date(),
+                        to: username,
+                        timestamp: new Date(),
                         message: $scope.message.substring(0, 200),
                         room: $scope.roomName,
                         type: "private"
                     });
                     $scope.message = "";
                     $scope.populateViewModel();
+                } else {
+                    console.log("failed in sending private message");
                 }
             });
         }
     };
-
-    $scope.$on('handleBroadcast', function() {
-        //$scope.populateMessages();
-    });
 
     $scope.populateViewModel = function populateViewModel() {
         $scope.messagesViewModel = [];
@@ -124,16 +123,20 @@ angular.module("quickchat").controller("ChatController",
             $scope.messagesViewModel.push(value);
         });
         $.each(globals.privateMessages, function(key, value) {
+            console.log(globals.privateMessages);
             if ($scope.roomName === value.room) {
                 if (value.from === $scope.nick) {
-                    value.nick = "You to ";
-                }
-                $scope.messagesViewModel.push(value);
-                if (value.to === $scope.nick) {
-                    value.nick = value.from;
-                $scope.messagesViewModel.push(value);
+                    $scope.messagesViewModel.push(value);
+                } else if (value.to === $scope.nick) {
+                    $scope.messagesViewModel.push(value);
                 }
             }
         });
+        console.log($scope.messagesViewModel);
+        $scope.messagesViewModel.sort(SortByDate);
     };
+
+    function SortByDate(a, b){
+        return a.timestamp > b.timestamp;
+    }
 }]);
