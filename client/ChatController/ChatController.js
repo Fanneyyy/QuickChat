@@ -1,6 +1,6 @@
 angular.module("quickchat").controller("ChatController", 
-        ["$scope", "$routeParams", "$location", "socket", "globals", 
-        function($scope, $routeParams, $location, socket, globals) {
+        ["$scope", "$location", "$routeParams", "socket", "globals", 
+        function($scope, $location, $routeParams, socket, globals) {
 
     $scope.nick = $routeParams.nickId;
     $scope.roomName = $routeParams.roomId;
@@ -9,19 +9,22 @@ angular.module("quickchat").controller("ChatController",
     $scope.messages = [];
     $scope.users = [];
     $scope.ops = [];
+    $scope.userlist = [];
     $scope.rooms = [];
     $scope.servermessage = "";
     $scope.privatemessages = [];
     $scope.messagesViewModel = [];
+    $scope.alerted = false;
+
     socket.emit("rooms");
     socket.emit("updatechat", $scope.roomName);
-    $scope.alerted = false;
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
         if ($scope.roomName !== undefined) {
             $scope.ops = $scope.rooms[$scope.roomName].ops;
             $scope.users = $scope.rooms[$scope.roomName].users;
+            $scope.updateUsers();
             $scope.roomTopic = $scope.rooms[$scope.roomName].topic;
             $scope.messages = $scope.rooms[$scope.roomName].messageHistory;
         }
@@ -44,6 +47,7 @@ angular.module("quickchat").controller("ChatController",
         if (roomName !== undefined) {
             $scope.users = users;
             $scope.ops = ops;
+            $scope.updateUsers();
         }
     });
 
@@ -65,7 +69,6 @@ angular.module("quickchat").controller("ChatController",
     socket.on("kicked", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
-            debugger;
             if (!$scope.alerted) {
                 alertify.error("You have been kicked from " + room);
                 $scope.alerted = true;
@@ -129,22 +132,33 @@ angular.module("quickchat").controller("ChatController",
     $scope.sendPrivateMessages = function sendPrivateMessages(user) {
         if (user) {
             for (var i = 0, len = user.length; i < len; i++) {
-                $scope.sendPrivateMessage(user[i]);
+                $scope.sendPrivateMessage(user[i], $scope.message);
             }
         }
         $scope.message = "";
-    }
+    };
 
-    $scope.sendPrivateMessage = function sendPrivateMessage(username) {
+    $scope.updateUsers = function updateUsers() {
+        $scope.userlist = [];
+        $.each($scope.users, function(key, value) {
+            if ($.inArray(value, Object.keys($scope.ops)) === 0) {
+                $scope.userlist.push("@"+value);
+            } else {
+                $scope.userlist.push(value);
+            }
+        });
+    };
+
+    $scope.sendPrivateMessage = function sendPrivateMessage(username, msg) {
         if (username !== $scope.nick) {
-            socket.emit("privatemsg", {nick: username, message: $scope.message}, function(success) {
+            socket.emit("privatemsg", {nick: username, message: msg}, function(success) {
                 console.log("send message");
                 if (success) {
                     globals.addMessage({
                         from: $scope.nick, 
                         to: username,
                         timestamp: new Date(),
-                        message: $scope.message.substring(0, 200),
+                        message: msg.substring(0, 200),
                         room: $scope.roomName,
                         type: "private"
                     });
@@ -172,7 +186,6 @@ angular.module("quickchat").controller("ChatController",
                 }
             }
         });
-        console.log($scope.messagesViewModel);
         $scope.messagesViewModel.sort(SortByDate);
     };
 

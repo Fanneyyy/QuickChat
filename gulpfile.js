@@ -21,7 +21,8 @@ gulp.task('build', function () {
             predef: [
                 'angular',
                 'io',
-                '$'
+                '$',
+                'alertify'
             ],
             globals: [
                 '_',
