@@ -11,7 +11,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.ops = [];
     $scope.userlist = [];
     $scope.rooms = [];
-    $scope.servermessage = "";
     $scope.privatemessages = [];
     $scope.messagesViewModel = [];
     $scope.alerted = false;
@@ -33,12 +32,6 @@ angular.module("quickchat").controller("ChatController",
         if (roomName === $scope.roomName) {
             $scope.messages = messageHistory;
             $scope.populateViewModel();
-        }
-    });
-
-    socket.on("servermessage", function(message, room, user) {
-        if (room !== undefined) {
-            $scope.servermessage = {message: message, room: room, user: user, type: "server"};
         }
     });
 
