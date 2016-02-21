@@ -64,6 +64,7 @@ angular.module("quickchat").controller("ChatController",
     socket.on("kicked", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
+            alertify.error("You have been kicked from " + room);
         }
     });
 
@@ -84,6 +85,8 @@ angular.module("quickchat").controller("ChatController",
     socket.on("banned", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
+            alertify.error("You have been banned from " + room);
+
         }
     });
 
