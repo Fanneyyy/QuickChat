@@ -5,8 +5,10 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
       socket.on(eventName, function () {  
         var args = arguments;
         $rootScope.$apply(function () {
-          console.log("on in services");
-          callback.apply(socket, args);
+         //console.log("on in services");
+          if (callback) {
+            callback.apply(socket, args);
+          }
         });
       });
     },

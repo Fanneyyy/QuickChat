@@ -1,6 +1,6 @@
 angular.module("quickchat").controller("ChatController", 
-        ["$scope", "$http", "$location", "$routeParams", "socket", "globals", 
-        function($scope, $http, $location, $routeParams, socket, globals) {
+        ["$scope", "$routeParams", "$location", "socket", "globals", 
+        function($scope, $routeParams, $location, socket, globals) {
 
     $scope.nick = $routeParams.nickId;
     $scope.roomName = $routeParams.roomId;
@@ -83,6 +83,9 @@ angular.module("quickchat").controller("ChatController",
         socket.emit("kick", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
                 $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
+            }
+            else {
+                alertify.error("You have kicked from " + room);
             }
         });
     };
@@ -172,6 +175,11 @@ angular.module("quickchat").controller("ChatController",
         console.log($scope.messagesViewModel);
         $scope.messagesViewModel.sort(SortByDate);
     };
+
+    $scope.$on('$destroy', function(event) {
+        console.log("Chat destroyed");
+        //socket.getSocket().removeAllListeners();
+    });
 
     function SortByDate(a, b){
         return a.timestamp > b.timestamp;

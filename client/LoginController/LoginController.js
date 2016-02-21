@@ -11,4 +11,7 @@ angular.module("quickchat").controller("LoginController",
             });
         }
     };
+    $scope.$on('$destroy', function(event) {
+        console.log("Login destroyed");
+    });
 }]);

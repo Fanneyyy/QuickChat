@@ -66,4 +66,7 @@ angular.module("quickchat").controller("RoomController",
             });
         }
     };
+    $scope.$on('$destroy', function(event) {
+        console.log("Room destroyed");
+    });
 }]);
