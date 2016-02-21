@@ -48,7 +48,6 @@ angular.module("quickchat").controller("ChatController",
             $scope.users = users;
             $scope.ops = ops;
             $scope.updateUsers();
-            debugger;
         }
     });
 
@@ -111,11 +110,15 @@ angular.module("quickchat").controller("ChatController",
 
     $scope.deopUsers = function deopUsers(user) {
         for (var i = 0, len = user.length; i < len; i++) {
-            $scope.opUser(user[i]);
+            $scope.deopUser(user[i]);
         }
     };
 
     $scope.deopUser = function deopUser(user) {
+        if (user.startsWith("@")) {
+            user = user.substr(1,user.length)                
+        } 
+        debugger;
         socket.emit("deop", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
                 $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
