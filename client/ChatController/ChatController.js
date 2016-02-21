@@ -116,28 +116,33 @@ angular.module("quickchat").controller("ChatController",
         $location.path('/home/rooms/' + $scope.nick);
     };
 
-    $scope.sendPrivateMessage = function sendPrivateMessage(user) {
+    $scope.sendPrivateMessages = function sendPrivateMessages(user) {
         if (user) {
-            var username = user[0];
-            if (username !== $scope.nick) {
-                socket.emit("privatemsg", {nick: username, message: $scope.message}, function(success) {
-                    console.log("send message");
-                    if (success) {
-                        globals.addMessage({
-                            from: $scope.nick, 
-                            to: username,
-                            timestamp: new Date(),
-                            message: $scope.message.substring(0, 200),
-                            room: $scope.roomName,
-                            type: "private"
-                        });
-                        $scope.message = "";
-                        $scope.populateViewModel();
-                    } else {
-                        console.log("failed in sending private message");
-                    }
-                });
+            for (var i = 0, len = user.length; i < len; i++) {
+                $scope.sendPrivateMessage(user[i]);
             }
+        }
+        $scope.message = "";
+    }
+
+    $scope.sendPrivateMessage = function sendPrivateMessage(username) {
+        if (username !== $scope.nick) {
+            socket.emit("privatemsg", {nick: username, message: $scope.message}, function(success) {
+                console.log("send message");
+                if (success) {
+                    globals.addMessage({
+                        from: $scope.nick, 
+                        to: username,
+                        timestamp: new Date(),
+                        message: $scope.message.substring(0, 200),
+                        room: $scope.roomName,
+                        type: "private"
+                    });
+                    $scope.populateViewModel();
+                } else {
+                    console.log("failed in sending private message");
+                }
+            });
         }
     };
 
