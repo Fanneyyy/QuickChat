@@ -162,7 +162,11 @@ angular.module("quickchat").controller("ChatController",
     $scope.sendPrivateMessages = function sendPrivateMessages(user) {
         if (user) {
             for (var i = 0, len = user.length; i < len; i++) {
-                $scope.sendPrivateMessage(user[i], $scope.message);
+                if (user[i].startsWith("@")) {
+                    $scope.sendPrivateMessage(user[i].substr(1,user[i].length), $scope.message);
+                } else {
+                    $scope.sendPrivateMessage(user[i], $scope.message);
+                }
             }
         }
         $scope.message = "";
@@ -180,6 +184,7 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.sendPrivateMessage = function sendPrivateMessage(username, msg) {
+        console.log(username);
         if (username !== $scope.nick) {
             socket.emit("privatemsg", {nick: username, message: msg}, function(success) {
                 console.log("send message");
