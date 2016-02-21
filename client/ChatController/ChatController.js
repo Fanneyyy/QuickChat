@@ -48,7 +48,6 @@ angular.module("quickchat").controller("ChatController",
             $scope.users = users;
             $scope.ops = ops;
             $scope.updateUsers();
-            debugger;
         }
     });
 
@@ -175,7 +174,7 @@ angular.module("quickchat").controller("ChatController",
     $scope.updateUsers = function updateUsers() {
         $scope.userlist = [];
         $.each($scope.users, function(key, value) {
-            if ($.inArray(value, Object.keys($scope.ops)) === 0) {
+            if ($.inArray(value, Object.keys($scope.ops)) > -1) {
                 $scope.userlist.push("@"+value);
             } else {
                 $scope.userlist.push(value);
@@ -184,7 +183,6 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.sendPrivateMessage = function sendPrivateMessage(username, msg) {
-        console.log(username);
         if (username !== $scope.nick) {
             socket.emit("privatemsg", {nick: username, message: msg}, function(success) {
                 console.log("send message");
