@@ -5,6 +5,7 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
       socket.on(eventName, function () {  
         var args = arguments;
         $rootScope.$apply(function () {
+          console.log("on in services");
           callback.apply(socket, args);
         });
       });
@@ -26,11 +27,8 @@ angular.module("quickchat").factory('globals', ["$rootScope", function ($rootSco
     var globals = {
       privateMessages: [],
       addMessage: function(obj) {
+        obj.timestamp = obj.timestamp.toJSON();
         this.privateMessages.push(obj);
-        this.broadCast();
-      },
-      broadCast: function() {
-        $rootScope.$broadcast('handleBroadcast');
       }
     };
     return globals;
