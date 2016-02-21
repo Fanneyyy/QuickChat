@@ -2,6 +2,10 @@ angular.module("quickchat").controller("ChatController",
         ["$scope", "$http", "$location", "$routeParams", "socket", "globals", 
         function($scope, $http, $location, $routeParams, socket, globals) {
 
+    socket.emit("rooms");
+    socket.emit("updatechat");
+    socket.emit("updateusers");
+    
     $scope.nick = $routeParams.nickId;
     $scope.roomName = $routeParams.roomId;
     $scope.roomTopic = "";
@@ -13,8 +17,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.servermessage = "";
     $scope.privatemessages = [];
     $scope.messagesViewModel = [];
-
-    socket.emit("rooms");
 
     socket.on("roomlist", function(data) {
         $scope.rooms = data;
@@ -120,10 +122,15 @@ angular.module("quickchat").controller("ChatController",
             $scope.messagesViewModel.push(value);
         });
         $.each(globals.privateMessages, function(key, value) {
-            if ($scope.roomName === value.room &&
-                    (value.from === $scope.nick || 
-                    value.to === $scope.nick)) {
+            if ($scope.roomName === value.room) {
+                if (value.from === $scope.nick) {
+                    value.nick = "You to ";
+                }
                 $scope.messagesViewModel.push(value);
+                if (value.to === $scope.nick) {
+                    value.nick = value.from;
+                $scope.messagesViewModel.push(value);
+                }
             }
         });
     };

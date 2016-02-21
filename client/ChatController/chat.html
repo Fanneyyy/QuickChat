@@ -1,32 +1,97 @@
 <div ng-controller="ChatController">
-    <div class="col-md-8">
-        <div ng-model="roomName">This room is called {{roomName}}</div>
-        <div ng-model="roomTopic">The topic is {{roomTopic}}</div>
-        <ul class="pull-right">
-            <li ng-repeat="op in ops">
-                {{op}}
-            </li>
-        </ul>
-        <form class="pull-right">
-            <select name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
-              <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
-            </select><br>
-            <tt>multipleSelect = {{data.multipleSelect}}</tt><br/>
-            <button ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
-        </form>
-        <div scroll-glue class="chatbox col-xs-10">
-            <ul>
-                <li ng-repeat="message in messagesViewModel">
-                    <div class="{{message.type}}">Time: {{message.timestamp | date:'HH:mm:ss'}} User: {{message.nick}} {{message.from}} To: {{message.to}} Message: {{message.message}} 
-                </li>
-            </ul>
-        </div>
-        <form>
-            <input type="text" ng-model="message"/>
-            <button id="submit" ng-click="addMessage(message)">Send Message</button>
-            <button id="submit" ng-click="sendPrivateMessage(data.multipleSelect)">Send Private Message</button>
-        </form>
-        <button ng-click="leaveRoom()">Leave Room</button>
-        <div ng-model="servermessage">{{servermessage.user}} {{servermessage.message}} {{servermessage.room}}</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 ng-model="roomName" class="page-header text-center">
+                            {{roomName}}
+                        </h1>
+
+                        <h2 ng-model="roomTopic" class="sub-header text-center">
+                            {{roomTopic}}
+                        </h2>
+                    </div>
+                
+                    <div class="col-sm-8 col-md-9">
+                        <div class="row no-gutter">
+                            <div class="col-md-12">
+                                <div scroll-glue class="chatbox h300">
+                                    <ul class="chat-messages">
+                                        <li ng-repeat="message in messagesViewModel">
+                                            <div class="{{message.type}}">[{{message.timestamp | date:'HH:mm:ss'}}] <span class="p5"> {{message.nick}} {{message.to}}:</span> <span class="p5">{{message.message}} </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input class="form-control" classtype="text" ng-model="message"/>
+                                        <div class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-warning button-input"
+                                                    id="submit"
+                                                    ng-click="addMessage(message)">
+                                                Send Message
+                                            </button>
+                                            <button class="btn btn-warning button-input" ng-click="sendPrivateMessage(data.multipleSelect)">Send Private Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-model="servermessage">
+                            {{servermessage.user}} {{servermessage.message}} {{servermessage.room}}
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-sm-4 col-md-3 sidebar">
+                        <div class="row no-gutter">
+                            <div class="col-md-12">
+                                <form>
+                                    <select class="full-width h300" class="block" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
+                                        <option ng-repeat="user in users" value="{{user}}">{{user}}</option>
+                                    </select>
+                                    <button class="btn btn-default btn-block" ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
+                                    <button class="btn btn-default btn-block" ng-click="leaveRoom()">Leave Room</button>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 btn-group" role="group" aria-label="Actions">
+                            <div class="row no-gutter">
+                                <div class="col-xs-3 col-md-3">
+                                    <button type="button" class="btn btn-secondary">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-3 col-md-3">
+                                    <button type="button" class="btn btn-secondary">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-3 col-md-3">
+                                    <button type="button" class="btn btn-secondary">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-3 col-md-3">
+                                    <button type="button" class="btn btn-secondary">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>          
     </div>
 </div>

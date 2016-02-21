@@ -17,3 +17,52 @@ ul li {
     background: #eee;
     overflow-y: scroll;
 }
+
+[scroll-glue] {
+    background: #eee;
+    overflow-y: scroll;
+}
+
+.text-input {
+  width: 50% !important;
+}
+
+.chat-messages {
+  bottom: 0;
+}
+
+.private {
+  color: #f5a129;
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.p5 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.h300 {
+    height: 300px !important;
+}
+
+.h150, select.h150 {
+    height: 150px;
+}
+
+@media (min-width: 992px) {
+    .no-padding-left {
+        padding-left: 0;
+    }
+
+    .no-padding-right {
+        padding-right: 0;
+    }
+}
