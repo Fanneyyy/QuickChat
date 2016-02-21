@@ -186,6 +186,7 @@ angular.module("quickchat").controller("ChatController",
                 $scope.userlist.push(value);
             }
         });
+        $scope.userlist.sort();
     };
 
     $scope.sendPrivateMessage = function sendPrivateMessage(username, msg) {
