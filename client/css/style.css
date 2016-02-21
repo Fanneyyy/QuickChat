@@ -53,6 +53,14 @@ ul li {
     width: 100%;
 }
 
+.quarter {
+  width: 25%;
+  border: 0px;
+  margin: 0px !important;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
 .p5 {
   padding-left: 5px;
   padding-right: 5px;

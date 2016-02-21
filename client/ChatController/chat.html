@@ -31,21 +31,22 @@
                                         <input class="form-control" classtype="text" ng-model="message"/>
                                         <div class="input-group-btn">
                                             <button type="submit"
-                                                    class="btn btn-warning button-input"
+                                                    class="btn btn-success button-input"
                                                     id="submit"
                                                     ng-click="addMessage(message)">
-                                                Send Message
+                                                Send
                                             </button>
-                                            <button class="btn btn-warning button-input" ng-click="sendPrivateMessages(data.multipleSelect)">Send Private Message</button>
+                                            <button class="btn btn-warning button-input" ng-click="sendPrivateMessages(data.multipleSelect)">Private Message</button>
+                                            <button class="btn btn-default" ng-click="leaveRoom()">Leave</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div ng-model="servermessage">
+<!--                         <div ng-model="servermessage">
                             {{servermessage.user}} {{servermessage.message}} {{servermessage.room}}
-                        </div>
+                        </div> -->
                         
                     </div>
 
@@ -56,17 +57,18 @@
                                     <select class="full-width h300" class="block" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
                                         <option ng-repeat="user in userlist" value="{{user}}">{{user}}</option>
                                     </select>
-                                    <button class="btn btn-default btn-block" ng-click="opUsers(data.multipleSelect)">Op Selected User</button>
-                                    <button class="btn btn-default btn-block" ng-click="deopUsers(data.multipleSelect)">DeOp Selected User</button>
-                                    <button class="btn btn-default btn-block" ng-click="kickUsers(data.multipleSelect)">Kick Selected User</button>
-                                    <button class="btn btn-default btn-block" ng-click="banUsers(data.multipleSelect)">Ban Selected User</button>
-                                    <button class="btn btn-default btn-block" ng-click="leaveRoom()">Leave Room</button>
+                                    <div class="btn-group full-width">
+                                        <button title="Op selected user" class="btn btn-success col-md-3 quarter" ng-click="opUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                        <button title="De-Op selected user" class="btn btn-primary col-md-3 quarter" ng-click="deopUsers(data.multipleSelect)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                        <button title="Kick selected user" class="btn btn-warning col-md-3 quarter" ng-click="kickUsers(data.multipleSelect)"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></button>
+                                        <button title="Ban selected user" class="btn btn-danger col-md-3 quarter" ng-click="banUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></button> 
+                                    </div>
                                 </form>
 
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-3 btn-group" role="group" aria-label="Actions">
+                        <!-- <div class="col-sm-12 col-md-3 btn-group" role="group" aria-label="Actions">
                             <div class="row no-gutter">
                                 <div class="col-xs-3 col-md-3">
                                     <button type="button" class="btn btn-secondary">
@@ -89,7 +91,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
