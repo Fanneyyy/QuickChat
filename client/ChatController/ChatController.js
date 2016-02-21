@@ -76,6 +76,16 @@ angular.module("quickchat").controller("ChatController",
         }
     });
 
+    socket.on("banned", function(room, user) {
+        if ($scope.roomName === room && $scope.nick === user) {
+            $location.path('/home/rooms/' + $scope.nick);
+            if (!$scope.alerted) {
+                alertify.error("You have been banned from " + room);
+                $scope.alerted = true;
+            }
+        }
+    });
+
     $scope.kickUsers = function kickUsers(user) {
         for (var i = 0, len = user.length; i < len; i++) {
             $scope.kickUser(user[i]);
@@ -116,25 +126,14 @@ angular.module("quickchat").controller("ChatController",
 
     $scope.deopUser = function deopUser(user) {
         if (user.startsWith("@")) {
-            user = user.substr(1,user.length)                
+            user = user.substr(1,user.length);            
         } 
-        debugger;
         socket.emit("deop", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
                 $scope.servermessage = {message: "You are not an Op", room: $scope.roomName, user: $scope.nick};
             }
         });
     };
-
-    socket.on("banned", function(room, user) {
-        if ($scope.roomName === room && $scope.nick === user) {
-            $location.path('/home/rooms/' + $scope.nick);
-            if (!$scope.alerted) {
-                alertify.error("You have been banned from " + room);
-                $scope.alerted = true;
-            }
-        }
-    });
 
     $scope.banUsers = function banUsers(user) {
         for (var i = 0, len = user.length; i < len; i++) {
