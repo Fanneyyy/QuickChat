@@ -64,6 +64,7 @@ angular.module("quickchat").controller("ChatController",
     socket.on("kicked", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
+            debugger;
             alertify.error("You have been kicked from " + room);
         }
     });
