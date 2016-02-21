@@ -56,8 +56,8 @@
                         <div class="row no-gutter">
                             <div class="col-md-12">
                                 <form>
-                                    <select class="full-width h300" class="block" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
-                                        <option ng-repeat="user in userlist" value="{{user}}">{{user}}</option>
+                                    <select class="full-width h300 userbox" class="block" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
+                                        <option class="username" ng-repeat="user in userlist" value="{{user}}">{{user}}</option>
                                     </select>
                                     <div class="btn-group full-width">
                                         <button title="Op selected user" class="btn btn-success col-md-3 quarter" ng-click="opUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
