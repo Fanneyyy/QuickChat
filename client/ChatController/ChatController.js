@@ -169,7 +169,7 @@ angular.module("quickchat").controller("ChatController",
             $scope.message = "";
         }
         else {
-            alertify.error("Please select a user to send " $scope.message);
+            alertify.error("Please select a user to send " + $scope.message);
         }
     };
 
