@@ -63,7 +63,7 @@ After login QuickChat shows a list of available rooms, displaying the number of 
 
 Inside each room the user can view all messages that are visible to him. He/she can then send messages to the message feed as well as send private messages to users in the room. The user can choose one or more people from the select box to send a private message. A user can leave a room and rejoin if he wants.
 
-### Operators privileges
+### Operator privileges
 The creator of each room in QuickChat has the privilege of being an operator. That is, he/she can kick/ban user from the room. Operators can also give other users operators privileges and take them away. Operators can kick/ban and deop each other. The user selects one or more users from the select box and presses the appropriate button to kick/ban/deop/op. If the user doesn't realise which buttons are used for what, the application offers tooltips that explain it better. If a user leaves a room he looses the operator privileges but if a user joins a room without a operator he will receive those privileges. A user is alerted to events such as being kicked and banned.
 
 ## Project Implementation
