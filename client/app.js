@@ -1,10 +1,11 @@
-"use strict";
-angular.module("quickchat", [
+var quickchat = angular.module("quickchat", [
+    'ng',
     'ngRoute',
     'luegg.directives'
-    ])
-    .config(function($routeProvider) {
-        $routeProvider
+]);
+
+angular.module("quickchat").config(['$routeProvider', function($routeProvider) {
+    $routeProvider
         .when("/home/index", {
             templateUrl: "client/login/login.html",
             controller: "LoginController"
@@ -17,7 +18,7 @@ angular.module("quickchat", [
             templateUrl: "client/chat/chat.html",
             controller: "ChatController"
         })
-        .otherwise( {
+        .otherwise({
             redirectTo: "/home/index"
         });
-    });
+}]);

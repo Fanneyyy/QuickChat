@@ -2,10 +2,17 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
-    shell = require('gulp-shell');
+    shell = require('gulp-shell'),
+    beautify = require('gulp-beautify');
+
+gulp.task('beautify', function() {
+  gulp.src('./client/**/*.js')
+    .pipe(beautify({indentSize: 4}))
+    .pipe(gulp.dest('./client/'))
+});
 
 gulp.task('build', function () {
-    return gulp.src('client/**/*.js')
+    return gulp.src(['client/**/*.js'])
         .pipe(jshint({ 
             curly:  true,
             immed:  true,
@@ -39,6 +46,6 @@ gulp.task('build', function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['build'], shell.task([
+gulp.task('default', ['beautify','build'], shell.task([
   'node chatserver.js'
 ]));

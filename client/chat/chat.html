@@ -1,55 +1,48 @@
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 ">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 ng-model="roomName" class="page-header text-center">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 ">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 ng-model="roomName" class="page-header text-center">
                             {{roomName}}
                         </h1>
 
-                        <h2 ng-model="roomTopic" class="sub-header text-center">
+                    <h2 ng-model="roomTopic" class="sub-header text-center">
                             {{roomTopic}}
                         </h2>
-                    </div>
-                
-                    <div class="col-sm-8 col-md-9">
-                        <div class="row no-gutter">
-                            <div class="col-md-12 chat">
-                                <div scroll-glue class="chatbox h300">
-                                    <ul class="chat-messages">
+                </div>
+
+                <div class="col-sm-8 col-md-9">
+                    <div class="row no-gutter">
+                        <div class="col-md-12 chat">
+                            <div scroll-glue class="chatbox h300">
+                                <ul class="chat-messages">
                                         <li ng-repeat="message in messagesViewModel track by $index">
                                             <div class="{{message.type}}">[{{message.timestamp | date:'HH:mm:ss'}}] <span class="p5"> {{message.nick ? message.nick : (message.from + " to")}} {{message.to}}:</span> <span class="p5">{{message.message}} </span>
+                                            </div>
                                         </li>
-                                    </ul>
-                                </div>
+                                    </div>
+                                </ul>
                             </div>
 
-                            
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <form>
-                                    <div class="input-group">
-                                        <input class="form-control" classtype="text" ng-model="message"/>
-                                        <div class="input-group-btn">
-                                            <button type="submit"
-                                                    class="btn btn-success button-input"
-                                                    id="submit"
-                                                    ng-click="addMessage(message)">
-                                                Send
-                                            </button>
-                                            <button class="btn btn-warning button-input" ng-click="sendPrivateMessages(data.multipleSelect)">Private Message</button>
-                                            <button class="btn btn-default" ng-click="leaveRoom()">Leave</button>
+                                        <div class="input-group">
+                                            <input class="form-control" classtype="text" ng-model="message" />
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-success button-input" id="submit" ng-click="addMessage(message)">
+                                                    Send
+                                                </button>
+                                                <button class="btn btn-warning button-input" ng-click="sendPrivateMessages(data.multipleSelect)">Private Message</button>
+                                                <button class="btn btn-default" ng-click="leaveRoom()">Leave</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-<!--                         <div ng-model="servermessage">
-                            {{servermessage.user}} {{servermessage.message}} {{servermessage.room}}
-                        </div> -->
-                        
                     </div>
 
                     <div class="col-sm-4 col-md-3 sidebar">
@@ -60,43 +53,22 @@
                                         <option class="username" ng-repeat="user in userlist" value="{{user}}">{{user}}</option>
                                     </select>
                                     <div class="btn-group full-width">
-                                        <button title="Op selected user" class="btn btn-success col-md-3 quarter" ng-click="opUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
-                                        <button title="De-Op selected user" class="btn btn-primary col-md-3 quarter" ng-click="deopUsers(data.multipleSelect)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                        <button title="Kick selected user" class="btn btn-warning col-md-3 quarter" ng-click="kickUsers(data.multipleSelect)"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></button>
-                                        <button title="Ban selected user" class="btn btn-danger col-md-3 quarter" ng-click="banUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></button> 
+                                        <button title="Op selected user" class="btn btn-success col-md-3 quarter" ng-click="opUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </button>
+                                        <button title="De-Op selected user" class="btn btn-primary col-md-3 quarter" ng-click="deopUsers(data.multipleSelect)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <button title="Kick selected user" class="btn btn-warning col-md-3 quarter" ng-click="kickUsers(data.multipleSelect)"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
+                                        </button>
+                                        <button title="Ban selected user" class="btn btn-danger col-md-3 quarter" ng-click="banUsers(data.multipleSelect)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                        </button>
                                     </div>
                                 </form>
 
                             </div>
                         </div>
-
-                        <!-- <div class="col-sm-12 col-md-3 btn-group" role="group" aria-label="Actions">
-                            <div class="row no-gutter">
-                                <div class="col-xs-3 col-md-3">
-                                    <button type="button" class="btn btn-secondary">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div class="col-xs-3 col-md-3">
-                                    <button type="button" class="btn btn-secondary">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div class="col-xs-3 col-md-3">
-                                    <button type="button" class="btn btn-secondary">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div class="col-xs-3 col-md-3">
-                                    <button type="button" class="btn btn-secondary">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
 
                 </div>
             </div>
-        </div>          
+        </div>
     </div>
