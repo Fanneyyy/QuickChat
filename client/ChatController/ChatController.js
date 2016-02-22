@@ -79,6 +79,9 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.kickUser = function kickUser(user) {
+        if (user.startsWith("@")) {
+            user = user.substr(1,user.length);            
+        } 
         socket.emit("kick", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
                 alertify.error("You are not an Op in room: " + $scope.roomName + " Sir/Madame " + $scope.nick);
@@ -130,6 +133,9 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.banUser = function kickUser(user) {
+        if (user.startsWith("@")) {
+            user = user.substr(1,user.length);            
+        } 
         socket.emit("ban", {room: $scope.roomName, user:user}, function(success) {
             if (!success) {
                 alertify.error("You are not an Op in room: " + $scope.roomName + " Sir/Madame " + $scope.nick);
@@ -160,8 +166,11 @@ angular.module("quickchat").controller("ChatController",
                     $scope.sendPrivateMessage(user[i], $scope.message);
                 }
             }
+            $scope.message = "";
         }
-        $scope.message = "";
+        else {
+            alertify.error("Please select a user to send " $scope.message);
+        }
     };
 
     $scope.updateUsers = function updateUsers() {
