@@ -3,8 +3,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
     shell = require('gulp-shell'),
-    beautify = require('gulp-beautify'),
-    connect = require('gulp-connect');
+    beautify = require('gulp-beautify');
 
 gulp.task('beautify', function() {
   gulp.src('./client/**/*.js')
