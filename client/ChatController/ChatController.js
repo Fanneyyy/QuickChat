@@ -158,19 +158,20 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.sendPrivateMessages = function sendPrivateMessages(user) {
-        if (user) {
-            for (var i = 0, len = user.length; i < len; i++) {
-                if (user[i].startsWith("@")) {
-                    $scope.sendPrivateMessage(user[i].substr(1,user[i].length), $scope.message);
-                } else {
-                    $scope.sendPrivateMessage(user[i], $scope.message);
+        if ($scope.message !== "") {
+            if (user) {
+                for (var i = 0, len = user.length; i < len; i++) {
+                    if (user[i].startsWith("@")) {
+                        $scope.sendPrivateMessage(user[i].substr(1,user[i].length), $scope.message);
+                    } else {
+                        $scope.sendPrivateMessage(user[i], $scope.message);
+                    }
                 }
-            }
-            $scope.message = "";
-        }
-        else {
+                $scope.message = "";
+            } else {
             alertify.error("Please select a user to send " + "'" + $scope.message + "'");
-        }
+            }
+        } 
     };
 
     $scope.updateUsers = function updateUsers() {
