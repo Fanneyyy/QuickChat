@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
-    shell = require('gulp-shell'),
+    shell = require('gulp-shell');
 
 gulp.task('build', function () {
     return gulp.src('client/**/*.js')
@@ -41,4 +41,4 @@ gulp.task('build', function () {
 
 gulp.task('default', ['build'], shell.task([
   'node chatserver.js'
-]))
+]));
