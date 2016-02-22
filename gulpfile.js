@@ -3,7 +3,6 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
     shell = require('gulp-shell'),
-    browserSync = require('browser-sync');
 
 gulp.task('build', function () {
     return gulp.src('client/**/*.js')
@@ -38,19 +37,6 @@ gulp.task('build', function () {
         .pipe(uglify())
         .pipe(concat('app.js'))
         .pipe(gulp.dest('build'));
-});
-
-gulp.task('watch', function () {
-    var files = [
-        'client/*',
-        '*.html'
-    ];
-
-    browserSync.init(files, {
-        server: {
-            baseDir: './'
-        }
-    });
 });
 
 gulp.task('default', ['build'], shell.task([
