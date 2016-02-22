@@ -21,6 +21,9 @@ angular.module("quickchat").factory('socket', ["$rootScope", function ($rootScop
           }
         });
       });
+    },
+    getSocket: function() {
+      return socket;
     }
   };
 }]);

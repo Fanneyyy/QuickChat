@@ -13,7 +13,6 @@ angular.module("quickchat").controller("ChatController",
     $scope.rooms = [];
     $scope.privatemessages = [];
     $scope.messagesViewModel = [];
-    $scope.alerted = false;
 
     socket.emit("rooms");
     socket.emit("updatechat", $scope.roomName);
@@ -62,20 +61,14 @@ angular.module("quickchat").controller("ChatController",
     socket.on("kicked", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
-            if (!$scope.alerted) {
-                alertify.error("You have been kicked from " + room);
-                $scope.alerted = true;
-            }
+            alertify.error("You have been kicked from " + room);
         }
     });
 
     socket.on("banned", function(room, user) {
         if ($scope.roomName === room && $scope.nick === user) {
             $location.path('/home/rooms/' + $scope.nick);
-            if (!$scope.alerted) {
-                alertify.error("You have been banned from " + room);
-                $scope.alerted = true;
-            }
+            alertify.error("You have been banned from " + room);
         }
     });
 
@@ -108,7 +101,6 @@ angular.module("quickchat").controller("ChatController",
             } else {
                 alertify.success("Successfully opped " + user);
             }
-
         });
     };
 
@@ -224,8 +216,7 @@ angular.module("quickchat").controller("ChatController",
     };
 
     $scope.$on('$destroy', function(event) {
-        console.log("Chat destroyed");
-        //socket.getSocket().removeAllListeners();
+        socket.getSocket().removeAllListeners();
     });
 
     function SortByDate(a, b){
