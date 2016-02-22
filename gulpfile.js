@@ -3,12 +3,21 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
     shell = require('gulp-shell'),
-    beautify = require('gulp-beautify');
+    beautify = require('gulp-beautify'),
+    connect = require('gulp-connect');
 
 gulp.task('beautify', function() {
   gulp.src('./client/**/*.js')
     .pipe(beautify({indentSize: 4}))
     .pipe(gulp.dest('./client/'))
+});
+
+gulp.task('serveprod', function() {
+  connect.server({
+    root: [your_project_path],
+    port: process.env.PORT || 5000,
+    livereload: false
+  });
 });
 
 gulp.task('build', function () {
