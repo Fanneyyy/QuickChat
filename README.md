@@ -67,7 +67,7 @@ Inside each room the user can view all messages that are visible to him. He/she 
 The creator of each room in QuickChat has the privilege of being an operator. That is, he/she can kick/ban user from the room. Operators can also give other users operators privileges and take them away. Operators can kick/ban and deop each other. The user selects one or more users from the select box and presses the appropriate button to kick/ban/deop/op. If the user doesn't realise which buttons are used for what, the application offers tooltips that explain it better. If a user leaves a room he looses the operator privileges but if a user joins a room without a operator he will receive those privileges. A user is alerted to events such as being kicked and banned.
 
 ## Project Implementation
-The application was developed for the latest Google Chrome Browser using Angular.js, HTML5 and CSS, with gulp. Other dependencies are listen in the package.json file and bower.json file.
+The application was developed by Fanney Sigurðardóttir and Kristinn Þorri Þrastarson, as a school project, given a server code in node.js. It was developed for the latest Google Chrome Browser using Angular.js, HTML5 and CSS, with gulp. Other dependencies are listen in the package.json file and bower.json file.
 
 ## Server changes
 Changes made to chatserver.js are as following:
@@ -75,3 +75,6 @@ Changes made to chatserver.js are as following:
 * Conflict between users being in both listed as users and ops in server fixed (removed from userlist when giving op and vice versa).
 * User automatically gets op when joining an empty room.
 * Added a listener to chatupdate, that returns messageHistory to the user upon joining a room.
+
+## Extra node
+When about to turn in the project we noticed that the requirements were to keep the client and server in two separate folders. When we started the project we set it up for Heroku for fun and we had the chatserver.js and the index.html files in the main folder, with all client side files in the client folder. Since we need to turn in the project we hope it's okay that we don't start messing with the folder structure.
