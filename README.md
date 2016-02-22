@@ -43,7 +43,7 @@ git push heroku master
 heroku open
 ```
 
-## Project requirements (needs new chapter name)
+## Project requirements
 
 * The user should upon arrival specify his/her name/nick. If the nickname is free, i.e. no other user is currently active with the same name, (s)he can proceed, otherwise a new nick must be provided. Note: no password is required, just a nickname.
 * After the user has identified, (s)he should see a list of chat rooms already active.
@@ -55,7 +55,7 @@ heroku open
 * All external dependencies (AngularJS etc.) should be installed using bower (EDIT: or npm)
 * The code should go through JSHint/JSLint without warnings. A grunt or gulp file should be included to ensure running jshint/jslint is easy.
 
-## Project user experience
+## Project user experience (need new chapter name)
 Quickchat is set up as a web application. The user picks it's username and is ready to go. The application has minimal security, only allowing one user with a specific username be connected at a time. 
 
 After login Quickchat shows a list of available rooms as well as giving the user the option of creating a room.
