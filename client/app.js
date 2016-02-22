@@ -6,15 +6,15 @@ angular.module("quickchat", [
     .config(function($routeProvider) {
         $routeProvider
         .when("/home/index", {
-            templateUrl: "client/LoginController/login.html",
+            templateUrl: "client/login/login.html",
             controller: "LoginController"
         })
         .when("/home/rooms/:nickId", {
-            templateUrl: "client/RoomController/rooms.html",
+            templateUrl: "client/room/rooms.html",
             controller: "RoomController"
         })
         .when("/home/chat/:nickId/:roomId", {
-            templateUrl: "client/ChatController/chat.html",
+            templateUrl: "client/chat/chat.html",
             controller: "ChatController"
         })
         .otherwise( {
